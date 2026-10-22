@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#131F14">
-  <title>Maraluxe Resort &amp; Spa — Bar &amp; Lounge Menu</title>
+  <meta name="theme-color" content="#132215">
+  <title>Maraluxe Resort &amp; Spa — Bar &amp; Restaurant Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 126px;
+      scroll-padding-top: 140px;
     }
 
     body {
@@ -60,7 +60,7 @@
       background: var(--forest);
       color: #EFE8D6;
       text-align: center;
-      padding: calc(env(safe-area-inset-top, 0px) + 22px) 20px 20px;
+      padding: calc(env(safe-area-inset-top, 0px) + 22px) 20px 18px;
       border-bottom: 2px solid var(--gold);
       position: relative;
     }
@@ -100,7 +100,7 @@
       letter-spacing: 0.34em;
       text-transform: uppercase;
       color: var(--gold-bright);
-      margin: 5px 0 14px;
+      margin: 5px 0 12px;
     }
 
     .menu-kicker {
@@ -122,11 +122,41 @@
     }
 
     .brand-motto {
-      margin: 8px 0 0;
+      margin: 8px 0 16px;
       font-size: 10.5px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #A9B4A4;
+    }
+
+    /* Primary Menu Mode Switcher (Bar vs Restaurant) */
+    .mode-switcher {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(212, 176, 106, 0.45);
+      border-radius: 5px;
+      padding: 3px;
+      width: min(100%, 380px);
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: 0;
+      color: #CFD6C3;
+      padding: 9px 14px;
+      border-radius: 3px;
+      font: 600 12px/1.1 'Jost', sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn.active {
+      background: var(--gold-bright);
+      color: #132215;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     /* Sticky Search & Category Bar */
@@ -326,6 +356,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
 
     .cat-banner span.currency-hint {
@@ -333,6 +364,14 @@
       letter-spacing: 0.14em;
       opacity: 0.8;
       font-weight: 400;
+      flex: none;
+    }
+
+    .cat-note {
+      margin: -2px 0 8px;
+      padding: 0 4px;
+      font: italic 14px/1.4 'Cormorant Garamond', Georgia, serif;
+      color: var(--muted);
     }
 
     /* Menu Item Rows with Dotted Leaders */
@@ -371,7 +410,7 @@
     }
 
     .nm {
-      font: 600 18px/1.25 'Cormorant Garamond', Georgia, serif;
+      font: 600 18.5px/1.25 'Cormorant Garamond', Georgia, serif;
       color: var(--ink);
     }
 
@@ -389,9 +428,10 @@
     }
 
     .ds {
-      margin-top: 2px;
+      margin-top: 3px;
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.42;
     }
 
     .dots {
@@ -419,7 +459,7 @@
       margin-left: 14px;
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 560px) {
       .pr {
         display: flex;
         flex-direction: column;
@@ -433,7 +473,7 @@
 
     .pr-label {
       color: var(--muted);
-      font-size: 11.5px;
+      font-size: 11px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
@@ -445,10 +485,24 @@
     }
 
     .none {
-      padding: 48px 16px;
+      padding: 42px 16px;
       text-align: center;
       color: var(--muted);
       font: italic 20px 'Cormorant Garamond', Georgia, serif;
+    }
+
+    .cross-switch-btn {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 9px 18px;
+      background: var(--gold);
+      color: #FFFFFF;
+      border: 0;
+      border-radius: 4px;
+      font: 600 12px 'Jost', sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
     /* Official PDF Contact Footer */
@@ -539,7 +593,7 @@
   <header class="site-header">
     <button class="theme-toggle" id="themeBtn" type="button" aria-label="Toggle color theme">Lounge Mode</button>
 
-    <!-- Crisp Vector Recreation of the Maraluxe Lotus-M Emblem from MARALUXE MENU.pdf -->
+    <!-- Crisp Vector Recreation of the Maraluxe Lotus-M Emblem -->
     <svg class="brand-crest" viewBox="0 0 120 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M18 74V22C34 22 48 34 60 54C72 34 86 22 102 22V74H90V37C80 42 70 52 60 68C50 52 40 42 30 37V74H18Z" fill="#D4B06A"/>
       <path d="M60 10C73 24 79 42 73 59C69 70 60 76 60 76C60 76 51 70 47 59C41 42 47 24 60 10ZM60 24C53 34 51 46 55 56C57 61 60 65 60 65C60 65 63 61 65 56C69 46 67 34 60 24Z" fill="#D4B06A"/>
@@ -548,14 +602,19 @@
 
     <h1 class="brand-title">Maraluxe</h1>
     <p class="brand-subtitle">Resort and Spa</p>
-    <p class="menu-kicker">Bar &amp; Lounge Menu</p>
+    <p class="menu-kicker" id="menuKicker">Bar &amp; Lounge Menu</p>
     <p class="brand-motto">Exceptional Cuisine &middot; Elegant Dining &middot; Unforgettable Moments</p>
+
+    <div class="mode-switcher" role="tablist" aria-label="Select Menu">
+      <button type="button" class="mode-btn active" id="tabBar" data-mode="bar" role="tab" aria-selected="true">Bar &amp; Lounge</button>
+      <button type="button" class="mode-btn" id="tabFood" data-mode="food" role="tab" aria-selected="false">Restaurant Menu</button>
+    </div>
   </header>
 
   <nav class="sticky-nav" aria-label="Menu categories">
     <div class="nav-inner">
       <div class="search-wrap">
-        <input id="q" type="search" placeholder="Search cocktails, single malts, wines…" autocomplete="off" aria-label="Search drinks">
+        <input id="q" type="search" placeholder="Search cocktails, single malts, wines…" autocomplete="off" aria-label="Search menu">
       </div>
       <div id="chips"></div>
     </div>
@@ -582,7 +641,7 @@
         www.maraluxe.ke
       </a>
     </div>
-    <div class="legal-note">All prices are in Kenyan Shillings (Ksh.) &middot; Please enjoy responsibly (18+)</div>
+    <div class="legal-note" id="legalNote">All prices are in Kenyan Shillings (Ksh.) &middot; Please enjoy responsibly (18+)</div>
   </footer>
 
   <div class="lb" id="lb" hidden>
@@ -592,318 +651,964 @@
   </div>
 
 <script>
-const D = {
-  "venue": "Maraluxe Resort and Spa",
-  "menu": "bar",
-  "currency": "KES",
-  "currencyLabel": "Ksh.",
-  "groups": [
-    {
-      "name": "Cocktails",
-      "hidden": false,
-      "categories": [
-        {
-          "name": "Signature Cocktails",
-          "items": [
-            {
-              "name": "Maraluxe Coconut Velvet",
-              "options": [{"label": "", "price": 1100}],
-              "tags": ["Signature"],
-              "image": {"t": "data:image/webp;base64,UklGRqYSAABXRUJQVlA4IJoSAABQQwCdASqAAIAAPlEejESjoaEWi7ckOAUEtABbvPYqDyl/ZeapYv8z/Z/2JxYNTeZh0x5xfSR5hPPu80H7Meq16S/7n6gH9S/u/W8egB0t/9t/7vpaYF7wT/J+Df4/9E/r/tx5ZPWvmP/LvwV/Q86vAf4yain45/RP9dwcYBv0j+y+AH/l+mP2e14egP+dP+//d/dj/zPKL+hf672Df55/a0QRC0XKZE92qk/VE5GXAEpPG5nDmBnZ457Sy6L6AaLLi+Hyp78RjXBiFdYfJ5AKUttBpuOpNE5r7CtiXrhaT+Fb1f/L5FV8TSmAp+tcsyENu5dxnUyBXo39CsOJmBBSOI+eB2d7HlEyJvC+ug31gI8xtKogh4fzCUOQuSOdxRLMs2PKMx2++QVnpf4SD/5WpISKSniVV3fo5dafGuJynn0huIJ9xcxB+c/PEqM28Ex4VUbe5KTPtR2wxsgfZ7A5jJprUZ5nveuvbO7+Z4beHEvd+PPW/8ptxz9QXKkJRlfzH7wfDZA4D5Mp/4rdrpVi9aZ/O2+hA9nlrwMgX16cGhny5CuliC0wPkF80D6n215IasPj3y9wTGqmS6oJ/zoOPOSRW6kbhRPLLp6la4rpP0UrdVhfU72h0jGibZB/T28llV/ezz71TAkDVrZG50JXnY5Oa5jn8Y//2F5OX+ug055rTVHRkCyTMAvHQRvNcKdIZ2IO3D+jOUMLksVdFdq7RzggAP7X52GS5SPKYliT8tqiFoQZMi3EE//5gYobIdHkCiv/3OGpNVxI9UHh3m6rrT/SoT6atXeOfiBXHewcZGGyNmuIhTx+jStmkK/kqmUs8lKTUp5Ej+spLBYsU8AiZyZO2jL5zt6YXhOWbewO9+RKMbzTy1F76ApGKbCxShRJLt4f8MFja8N8I5UMMSTUJfV/OLob8O+9tsWrRJCZFXme+ozevu+gun0fuBwdPl5IrTEnBAtCh+Yl60OXetDjAV/kXFIdkgT2r4Pk8y7QQOa/QkjPH/MKiBjYaMsTjMRs5zTXjzyPiS/m91m0IjS/bteC5HYnkgc62krU+5oz5CwzkT+RjFT5rmNM9nKx7s2pj/1eVbo+FU2ZK3Y88wLxW8haqid6N9+WrJtnNXE72ni12p8eMkvsfl6EhnKxm76csbg0+PJdCsvMwqU78v/o4xpmzaFW/DgvkI7v7KBfpO58809ZsAUlzRfaLH0A7yqlTntXcAWywZ9Vg6S/+2pMEb8XEwp9KkcQ9eTUO7XOqKVvbHFX8gZKKaNla8zrJtYvAkLyumvDS/949qHo3Ph/mT5vrKPh5P9zmrTmtwdIuxKrxDM4yQLJXOWAyvmxX3iTBe3aYx4VlhJnrc0G7WuUR20uqp76iFoNaUanWK3zh26s5cEtI/0iXrj7rM5aCTjqaK0nCXpkjk9sKQjpTEBoF+SlIquAD7t5C+YZpTRcl201biAWbX015G2rHQzkzTeTkuLB0RBdIr/ldeVqv4hIqZwqjakzrAqak5A1szWrxEoIsYg2tWpkUzpNqdvbBgpyTHVsoL8nIQQeMZuN2v1KtiJGUYSMo41KaAwEpFWMq/RtnO3fJMFIc8EuU4szpvhowvURssBXTADPCc/m/aF+m4z1dggLTzBVb4PRlaHOKuHb7LkxMPdvyWNwG+ovT9tataAI+N+84EqBKRfzRPhgJWEIiWp2QdmOJwAHOGJunqGB3Y2hffZDz+eAfCdFJGjfdq2aaem9FZ0VbJAgmt4Irc3CYHKq3gf+1m4lbt/SiP24fOgRes/u6u1Yjc+CwVa5qWyeAkT7Jl/U5cYaAUyoXruoxFnuapg298ey0B97+cNIczpG9/mL/FSCXO8NGC0zN/RnVZtsb7RwntM1zmQzeJ7UAq2qqTslp531E2MZpgGzM2lDNsuYSSD9kQ+3+ka2b1Dn9kUUhqFwrm5973NuDRgallQFv6YKi1rE2Y/Z6yYBL/0Nu5S4ZKoZC7mxx2MhwRlFbAJXIt4cZH/+NEMp0NrwIxG4rm7g3xqxU8e+em7nDXQuxCvtt4l2nMvlMpYz6zip5+TjpMPlexLiOnZs80sF69l5j0cyQ0e9iJkPTpwnAtaA8Ol1Kj6QNhkaGdI9/eEGsZaV2G0l8b1XPoowPT9+UxowCRlzk1X+daK1Ect8fHkg4s+BXLf6e6cqoaVJ/I9qsZ6PCtvvl4dp7VNT8Rir9mvX9G6PTN45vqOkD1T95sz2R+B6otSHF476H2Pf+qy5AcPQXhkmRIG/woPijNXgmKRhUERHBr95hTA8Kuj4Ihy+dNP/gsfxfwyILInqIGZV3epUxWI7OabOJTTuCDNNI/IK+jRVlEu6bklepLvm0JdghvicqqJUdv67sy2PlYhCuM50R2ZLoSfNMXdIrlnrSDM6vMd+7sDG76FZnqi1eMSjoyFcdnmruj8OwsyHeKiAPSXygv+cUqCW2DaIu6gHlAMEKrqCk0IM1dKa5SzG6d5k4z7oFjxVlE2WOd/FrjUltZN2zTQtcMIHyRx9Ofumf6bl0ygEGHKpLouY0NU50T6fcbAkZUacTsPkZqLL7a+8D56qQUbkgQ2zBqvDEcTmILVdHflD/IwLjUpA3eNNd7lWx9YjTtxkuIM90yK+BN3IUQFQYrtyf6Aqxr/9J/gAL3q5X9UAd/7I1yw+pmdZM7bIipww1kT2qLuUfR6jiXmI/eT4hVA1zG04wx9/BDjJdIBV29EqBzCbCPabNUQkVH0lB8QLo6bC/xoaCMi3vEoIAKCuFSJ2ykKSrh0mocGf9wCOarpl8g+Yw20o8ke30TRDo9Xmnf/4mBxReL8kdctjob86cb1sb+qI+Tc85fkJs+cKe0rwcWUSX95ygB6i0dEMy3Xi9o1nlWKpU8nzf74HQ1KCneP6Kzv+gPGwuDZf/jyXnutGuXgCLXeg2c6oRMzOI+xldlFNDXPshI2KWW4XeJwUOgVIUiok9koN5of3XzLRRg7HKZ/zp5Eg2P89bSURB7yWn/H2GSJi4j8sgDhEjGIHMrLj6ufigxGPiVPaK+lhitjqrKkrhNHR/O64DlN/Ux2nSdKUo4FS/tH3Gs+7VLhZQf+fy97DdqdwsyFH+IL3kQRcDUN9wtbtWI5T5y+ODQO5vKtxr9JehTr0cWOmzzoW2idcZgk3h7D/nEgUdIz3s7zMIlwDGoUAlBovN+bP9z2HQCTg4iKvTujnPU4vUsV85NBSmsuwaH51A/CVXeF1ayW9Rypm1eu9kzEvtywW/LBT1cwmrQ+HF3dfuGim23zKsruyPbwYi7IyCxpxTp+LmcQ7im1LxNSZaLsVEyrVbsDaBzW5IqIhnouySZF1dIQ4sWrUJK1xAMtGNvMFWQR3zM5kP/RIm/U7v+KlIjt+z2etn3bunmB4dZIisPkZZOu+DAMaLv8UDctGugAydvrujtfvemH5H7b2daPzWlrnCajt+4UST/e3PPyGstt2i10fiQF+OSJPw3ox0Xt4/MF2EHmAGMPyRhzZmABaFv9rvDHAEk91/ekup+CU3lX0l7f3Ts+GHrInuPo25YdJaluWkutt2mj4a14qEvIzIKbH9mAdXsPf23iPqvieKylAVZ20cZDZAvqpAQf3KAsjXjLhzFPqXt01o0wWvquo9mqhBxPsnVdmHlMYFsDsW2SMB+lpcfnrZrBZ4+X34COrdau8+qCHX4SiMvrjDX4axyz2ryTALfwswrkSmN9D+LuX/WpG/Gkf6deLG/7Kbv+/RjQYkSWwQqpBEho/0Au83lnryT+EfaUF/77vyfUrtAlcJuWokn1ej22Y3sRh0p3c8dr0+uf2dKhmUPwateyz3EXFhdUJGlg1ELm+KbrnVkjjxAUaWUknwSY3Muz3aK6c/LWmQix7Rrw+8bQBHhQ8FcyjMsiTC3KG2Q1+E4YGGy8+ZoqpdSrY2CL7XJ63ZN/QBU4BaITJPwKV8+1oddkItQ3lZT5uszU4uv6TpFBjhjUILrNr+Uf9CDXlrXkegMuQg/NNKpzKwfq1ghersz2zFJD4LgGc64nLEbwFNzj3IboY+JUIhH1zrbyKn/IiRYgpbvh4nkzWkyD+Fc/WlogZRlXUgSQQDjglIvnjaa7uxDGkZ8jtDWbvGm1KCwulFqZe/nZpsSuBGyLPVhZKyenf/UkO++FnM4tY6mAuD86cYPFq3lk5/j3Jna7fQuoayV7pB1XVnH+0ZXCJwFoiKple7HcxvEKpiFPYTN8jaXhLV5P//zcvU4939TyuBcPB1MEH+2dj3BEVWFJJszhiDkHpUKzBUVKLrlZtVmu16AeDO//0+DjJ2SQO5uV0/UfnxkD4cKqOTKKYgvkxApWWIdewvdf4DerPM1KgWuwhv6wmVONSqNfe4ft9F2vfR8MS/UfCgOmE+o1mBJ+VWg4dgJw4qCA8YmOG+tTQFUwzlGOfrKaj7Yj1ukK7DriT+/M9yczLMUEZ7k03FTygwLBmnYoeYuoCxO8XkuGIolc/dV1TGNX09nOoi9OxK6bOwJXehL6VNm8hQxg5YuVMjzcJrcxH6PB/SXbFZSULR/LLtvW5F7GXMgdzTNNVq8bFRYhp8OmwjRMnxIsEgH0nbuoxS2P44zY6ExQGlrSPlXRpOmz4B0aFfvXmF9qSAPhertBesz80DgmJPpqEDvnT/kOX36lPFXS7SBVK2H9cfvgulEbmwL8ttdwh1/eXIvzsdjMhyEjMBZgxxb2OOJClu0wf1NrOQEtEwANCrAnfkruxhlrBryoYaSeqoYHww80JeW5hxkO9ffgEfCCqAUZvywGcsE60g2QAgTUJq8gGf40rSdtDDjDCvQDQMtuyoel8GHctfIaVsrXHWqTjGRO+D1S9M+RzMlgC8k9XuSWblCWkQRWb2I4hBLSDUWvgsleuWo8qFExVJLnLnd94To64xcUCyFCAOywP3Nb8e0aqIR8RfvOZKM6Lr3033WDuE4Yw2Hd8VbQ9srIDVzyGjPOD0dHtMS3z/IuvOo3iGqfY5wCF9685ZH/98qdlth081qWf+Gko3Rx1GmrjDtr7MwABF+9kjewraclK0ZzDCYsIKm5KFGCyF7pYRZJ+JllRNlnfMeXQEPd11Wj55JcCkrqftJM0hy1fc1Es27ZajSwl1p/H7RjLLs6OsWrYh2CYLUcGoICOOtbDuS7X+v1ZTR6i76JgZeJKDrrRni11vMGUZKxJnvDDi13TtL7bHSF4CmE2cuMOD64pCzlr5hLhbQNQhqJ3twL5jcz5kgQyBnS99Zi3vhSCi8jAjzkYLaaGpFSf+tVRuqbz60KlfW3/9rT8BL0kblN+qMgDAnuqVA3fqcsCdNqQO3g6BabYPaRM/E8/PfS0PgoYN2DZLAvvYm9Q+Fl+KVwPzYNKgVbaTLsCnCLW93A3qUlRptPuglXE9YzgESItQy17Bk4xG8TBL5qYg7OxhsB5B7rlWRo1psfu6U1an9miKyeGA0DAcBJu+47x+L5HjOhNrpaFYlYkC3BC4WkWg/nWtj0d/GC0rtddohbCzqHFYjiKqImSmB5V34eqcAG5rMIV3U5tIzgu/pObMj2S7QjgtglxbSY+bO02xpuH6C5Por1knWQIsgtZQBruX1fJRNfqPbn5fbC8MzrjdoEKW0hTUQZAPYb39MByfhOU4+3iIcdUsbrxCSw/t+F+vKS+R2zqsyVo3rPUsc3FuhbBQTbpGmp7kQKXf6aIOL/ekfZd/u1U/IwW8Wsdir299F7lBS8uTQMBRTHVh/pfOgEiYGmaTufW7cAjcS6ZgygH1U3kUyT/8uAmaFks/gpNgUCUwtPV5Q16W8LOroXXe9QD256/AmvnnSYGB73lId4gy6H9RTi3kXF3cZk2FFiCP5hrAvqDK0VRYeDIwjTX4xdZKUt0YE2dPvz4c0k4ERRxvETtr5b5hbwkH8mSNC29J+ldVPomg3JJTD/bu/TLANFMosEmvMKh9xrCbJ5JLXDM1Q7rSjziBcJao6ptf02N1ZdHr5fpTtBIYKMpyj7xHk92pXeIxho6CcK0im5EvQMIdQb1pmlb1FD5n1lirB0KcRmawP/4rTSQNou025tgUCa4NV7rtYAWNMsHJg2haqIjMqfN2Fk8VFfwzrBqbR1awKNhdVfsoSZ5UMYzMitcRbpEYWJ7KOPTW5tga31v2z+eeWCQbdBZdWmFws5roXkKhw3ie6cq9TqHsTbb9H1NsqT6BVQiu0W9jHdZWVVa3qgFCsMFQMp1zHB+g5C00Qp9CWMZCK8XeqvTossBtDHVSlS/yF+rfzj5fhknrNfzRm1ajeRO96cL1Vpq2n9g9ejhrDFpjVSTDh01jzU7PzR+K+GWcS/yA2XsxCDsznmSyPj1RyPd1I6d4U9pQAAA"}
-            },
-            {
-              "name": "Maraluxe Mango Splash",
-              "options": [{"label": "", "price": 650}],
-              "tags": ["Signature"],
-              "image": {"t": "data:image/webp;base64,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"}
-            },
-            {
-              "name": "Maraluxe Oasis",
-              "options": [{"label": "", "price": 600}],
-              "tags": ["Signature"],
-              "image": {"t": "data:image/webp;base64,UklGRngEAABXRUJQVlA4IGwEAABQFACdASpcAFwAPlEgjkSjoiEVW1WoOAUEoAzfRazNygbX3WZAMPBLTyoZvTBlHSpznWjNhtnif24iQDrHTegZQ5QiK/SctfHCF6Cey0VwmabI3/0GzTydH6Oeo76MS9gRvLO7z/ihcAME3OZnScaCS4HCHgpLNLaWzsbStoZO0QQCyM5exggwtCPSvz7WksPoMWk9eU8nM3tLibpNdDhASqUO8IloVIZpIAAA55Z1CUXpE9e1V4Gf1p/KUbzIczLbaF6bIntyfM0+Uiw41lH6xK6DZeWJ813AafpdwRMZxizQx60g9HHzMXpG047YXL1/ik6PvbtCfhyL45df47/6+vtFuAqf2YmIzOf+csr7sOQn7V/WO4dJVNIVdYz9Y0BANEFfhjH25YedhKAKCDwm5dTrcZreA9ZvWx2rLx33Lj6lRh7nBaYMgS5xN4R/+xaTUxFghyHSO/IzCBryildW/UgYzCtmTBmnjknaje+Y8AXuWdeZBsOAbFnP/r8utOTLW61ouU6yOwIvEfYOSshZ5Wzedpx8gChiJdGuYCs+t0Zls6D2ypOWvhFXP9Ll7ONcxNgRV5yYEqjwGjOqJH2lO+7WbT+EP+SBlwammAz8IbzcCoR0oKh04WxSvR6HumZlGiIc13qrDMrt8nArXOUaSsGtfrhIwYOyaic2Tcu5tKIz5bmSsF5nLxDTxjkCmd5NeVzk/7XVX0RWTdwOjdmZ+MbWmD7tm8ewvfsZGtFyhDNRg9E4veJ0wtV4os7b0zjR0SUIjZEjHIOG+wM/FDyleSEfcfqyE6GLTvIqesW44zq2c0SiIy6uKTyLOkbELSXWonqAnXsU+P8bR9SDhUGoQLGEHh4kUgm4tMtrFwmd54YXf2xBQ9/5m+efHfn1aYy4EEjtzTRl9pPUlY+uXVFslsUGoXUmDvNrq4Sz/Xqw923kJfW+0FotqApUwzdEpvMw4Wx5p7C0YZIfwl1ub+YE/1JwKsUAvdX2QGTeggD0KkEFpogI+QGhlOJvnw61yb8QxVd1MFYs0kl320WN5Mo/yPNx8M0srL3ZO8SByYWgALzThX7047HoUJ8ueTEakHU5Kf7Kiw5NO1gX5vbGvN5m6F60w8KYfBBi5KBhaV7NOOT2nkzRb8jCN85uAjIYBAlFcchV4iJLIhCGiC5hYNG0f5LLCo/lFR1L6nv4532YDBcMEPnGiDRKh01sLyAds1CpYRsS+wB+L3Hdcb45b6vv1hsFc/9F2HCGhbF/4Bf6B8PkWI0d57tEf4v10QpPAwP0ZV1rmWSzN9jNh8nUQ90AtjisWmkP4oRmij1itm3nnH5391UaeEciGQBHQ/o04P2Zy9cjbvZdzAQ3vMMvJBJt3KWqdky7b8/V3iSmy5RvIg2+p4GubD0UnYg+H6Eazinzp1P0oaeR9KNKKlXgZR3qa0qS3OXvjCOeZJNV9KjCVMdhpt3DWt/Xujvi31eL+pAj09NvhIaTPPxc1PDoC4E/308AEYzAr5qdqAAA"}
-            },
-            {
-              "name": "Maraluxe Strawberry Bliss",
-              "options": [{"label": "", "price": 600}],
-              "tags": ["Signature"],
-              "image": {"t": "data:image/webp;base64,UklGRloOAABXRUJQVlA4IE4OAABwMwCdASqAAIAAPlEgjUQjoiEWyc58OAUEsQBpyhpjlklWb/P/jLkTzN92WTT1leYBz6fNv0YvQA/Z3rhvQ86Y79zK7p4M+Sj4TKQ8FdRHtf/geZfgD8f9Qv2d/sfR1gBaW+gj7Q/fPAe1Yr2b067/v0j2Bv5//jf+v/b/Za0IfVvsIfrsgKRzD0/wqZQTtTTjGo8PvV/yjtS4doy0GQP1527cJiLemlmQJudOwm/ddEOME2MnX9bMtqRTgk0o2c49TZNMUI/g5Qzd2+Rcoz5cuSZ+DYM+PQ2MQ+pxNfoyZvvpgKAWXGQqejwFH9HvRwk+RHYrgZjdyqma2qFkmpWVygBx5A8BAge9l8BL1suAU4tcZJK2SRpOGFYQBhGzLK08vSuaCcWdLzLYiUJ235Mn70l9Kf83fDTNLTvBwa9jj9M33j0EcKcecE2ALvRcz2U6SFfbJ1a9mT+Yk8NxkiuFDprIoF+kMo2Ah6nM7fs1iDCLiLHfOKrQyhjlaUKtrtg1mKfgxkIRETJX8va/eHfrmbtxXNjLtYbSuqcszKYiRBeeoAAA/v134uF+vIHu02s8Y9/+8r2FPyZ5fAqtr8Be0QJTqxwQkRlRUVWDef0LMl0yd9i6C5glJPOE4qfxr0+G+QEUmuK26sPx//1kyX9tMbIkFlp9rZRmIpmlvSPr4l1iwWMdbCnt/B2nOZDfuCHSBH9pH6fpaJrhG6oQvH5MW8Kvra+T91FGhZYj9XTvRk3A4x+uI56jiCQ7wOiWZWnIFyzOlJDrsfk4gRyRHmhHYk2+fOLVB6+4xCx7Yzy/3TQs9284WJL6SmzPZnL3JZX2Xrq6WpMV6HdYPDqOCBWpW8gzlKNyXSxiWgNHjtutl1I2U/KXdb8n/8tJEJ/Yhtg9VGhoSOm/gZKaVWPorSWbK8G2mA2uLElZnc2nEuL9R2tb2+K0ND5NduiK5kU8lLgQDrLkIsWMMjRcgFMIchXA2Aih8w45f56glZwFJGPVdf1EKbFW0CfxKoNXEtVhVif/NHB739CPAd4fc9w96o3L/v/R//he70hjblkIdeLUGfl1XwVwsRx15Ve479xWNwkWlaIPRzCdQs8WWGytaSeTMVCXH9ZATjKW/l8H5b/p9wi5KcO56HI+W/1GfcuZoDVyAfiWAy/MtOhFuY2Wsn7MiBv5mt2wKiJDQp+1rLQVJ9+WH6mh2NtzIWkJdU4ZgnFEPvQR3iqAPu4gDB71tSbt0gCmrbpH/RJGrdpZpXe5cGXLlv9gky4U5aeFMDP2VVPx4WPs35UWkpgx7Edf9+Mr9+tL07OqP+OYyouzj4bXFQwGs/C4KyYDrKZ4s1JMm3uo7WjdjFwan/23Y21aWwdiXwllW7hVl54Y3J7Rz31C/ynsEF09+2OwJVcOpu9W7BMsFcTTDFJFq++f3OQgf3HSH9+oubOSBi/411Uof4gHoAHVigfeCAqTE8RNgM/OBZjqWeTWKZxLg+CaTo1/00R5PDTgssJu6Ot83X5JmY3El+bGA9NWyH04BOu6CXb9jwIEkTh5rPXVACl4GgCM0uZ07LBcdSaRfvbLOy6XTh/Piy1xyyFiiHKmNqNBNiHuAu/bJ37fOiWDIENzDlZlGxg/Tx1Tfu7dVO7YAr2UYvflDb9f8m1FAYDbLjrYlukXvKHDN1UcLY5EsL16456WAffmvI0le9MRls3QOWwQc0QDC7MzWsCAM7CjHJVKKGJVj1j5fRQA3QxZu1YJ+Y0lvLb2RUuQW2Dsd4g3wIzA/vAYcRu1suvJXSbWMuPY7MtxEBY+bxxK1asJAIqBHZ929tZp6hEkRlzGI6MTu2LMgzpFR+7kPLQIxdx8PXFSiXQiSgpWm/nV5gUkRQFtqr+YCDATUjWeIY9MjBSZErY90x9U1aG2XI3RJBoA3ZJJLDCutikU4qBuwfKOR+qMAC6PwUKmDfkaday/aR8e2fKt/LyZB2Mir+pdG+6Qb/b4mm3/G29t+NTGG0tdkCJPMEMqy2sW9bqAlFavZRTeNlpV7azB/CCfCtKEunHGrGuXeKxJ5yaiH9vAf3EzQU81gRGcYgGHYJb9RJ0PC2U0diBbAqZHhaNtDdDSWMFYX61kyXkhaF/YvbzeDIoaZ8vvYVS24QZ/zsZBfCqvorIfwz3OyemKDmd3PH1QYKIFridwx0icUTtWDewdW/wTnlGXnEyI0RFuRuGNuHoVsKCL8af2MYsKICTDT+Yzz/Ec6tSN4aHKdjXsfUsNDID6CZEAGyxTJYXf/4nKm/n1rtwVM11B99fravtOswtsWsQbp4VzqNgnSBh2tzrurzVymdUdaNdoOX/Vcehx3q+a/Kr3PSsP84N+pi7U/JB2hGX8l68DoIVVfJUQpzUu5k8fMkGuOpytuar+Tq6Mf9mQ6x8W4QZBHdvJuAoCIjt2iq0AG/boj1f1L9yM3A250ypFM7dF7brJv6/+86FB9In9Hpy8WjLNm8ePWpjRWqTUj84s2WW9aWo+Lq4iB8yvsdu1KNSdWEY18s4Zmfx/hVw6qZAB9KWxqfVyM2y9peo0VfTayR7uOdx3hnD5Ndr7K0ODAW/X7DGhJnQmLHQEvS+ZnZ/ITzp6PZwcMBjimzfLzde4lP6Bvm05NeWu1xNU6yWZRaun6oEcjns5vY+QT/vt9fptmbzlkyoV+oF2zCgnHRMtJHQNsEfUqBU20Rlb/Jr3qc9lynpxjpk4U84y/Cqtf4HgD7CO1r3x0HwBWlpXLnjTllcxO0q1mPH/eRkDmlAh6lQg1eDho1h2SnkH/hr+A3q8rqRV1ACKmA3KPauYgQKYK/PVsQIluAh3CBs3hOHfOZtnf5JA6lp/Yqa8VVKBd52//vdTbgox1ytNpX6UiA7iaXqerIXPzMxUR7T/vnxNo6po93AOb986jBrFA4wcisFBr9xOqq7thdkaS2Uuf2rQCk76IJTlP2TWi3U1vusVXBjz1N6mpP1p1Ztt6i+Ya7BJSvT8vwHtQYaqDWFdq/bc4dmZwpvG4UBNTBwgkaZtX0QjVVD6DfyqhyqeoyM5ccpfUIzqQlkXF1ufvhJ93tpFXq2PryTc4FwkvEDItMwKIT0tGgh987gnaDwaK1UuEvq88hIBNhiKotERPOGk2yICZJ1jutxeugwmZsdyUhG35MSaCJAwjMtPPNHsXdUn7ldZ8ldqiZmvsinQschm+XFoOez9OMW+LeLeuF9QspNIBvYlnlrE5zlo8lDOq50ZYmSQsiejAJgXKeu/ut2jJvbUgdoOsUXhBR8fhlv+d42+VJhb58BayO9M9bbb44hUxbivjQa8IjTeAO3459cHA9Kzd/rQqFfjxsuxXTbfRgavQLkAtCOUs4GUmhipmPfWNy93nqfappjqlz0Ez22GZqwQz81t4up+rQzJHLfL3oUfKNZpnvzxZynahtWgaZTUJwrh46lOIdn+8sdlY/VBq3CvP76fXuh3GkpzEkiJ/czTU6OYAZsYdXQ8L625SUYO5BxU8FPsnVhWq82aJ/4HBVBv+03x1/sTSw4wri+xdDUMNjNu1tMqijo0S/cbwfeLwhrszjZ+Uenzl8r6JOyGfaCQa1lmJix/JRtd/+/6aiUyNqB8cg3ZZr6j/lY5Q0HGnX2nOQTovxD23dF5xT8DDl+ExMJiejscbEyx+mf3qRRAiBawuXO63z4uXtfTPP3kJrwpV782TNr/ax5+DxFPpeyUqEUl/HBG/32wR/4xtP//533P96qPORMyNEcnWX7SZdf3/Q6e8pHpBDfNCgoPLB+GSe5tLnbRRToVzeS22aQv+GTVh6+6PB9xQEXM4KWiQMFzRTDl2sfxvFvm3oo1PTGWxfscqnkJymjDmcAIphlDQanTl/sSbPyfdPKUjUfkAY1bJFwvXTTb+3CckKTkF89QUuvFM3NsX3rWMz3TxTPqwOfITU4DGakhJoMpuL2LKmNtXbN6/B18MZPJvarzAVSxK5/vPydTPThnHy3uzbLm17SmX5kd2/Lj+XipSvWlzlTMMz/2q6T5nuyqZHv6E0La+jmHJauhltj+DrtAaVaowMNg94I5W1LjIbMxTXfcgSReIN0rPWQIfqOgSx7z807rjHZfiF5c9ij50r6qO6E95XTZ2yyKqtaNT96IIiXTp2w31H5EnUtcvHvUYM0Qdd4PDq6OEm3LV6f/jtCqdIQAWkFC9HNYeV3jMpwzN4mj3k42xZEWyfCzGjD/w8v1maAIoNtPaNSZohoxpu3pmYQ32i6yb3sKpRnI8socr5tlIHMO/9I+RqxTzqZHMtdRIVuyspX0tNwy/6YAZVMAMXiL8P0lOVvocy47kEtoLCRmIdftK9mfLeqrTN7kr+8/3IR+30jO1jGxMWpasJ9UjKGOxZA16BURUVYoioXwKKGP+BA0CCaNp5nR0a/amoSV/DQegLY4jOK48nz4qojPtQ7fuCzB5ktpJgzmuwdSIqF+88AWMlZqldsnk3fDIARM5s4ADIZB4+3Lnswrzw0jE3B5X+MCN8MqLstuNfVefg8F0IDgeLZbVa5wi38iTHX7bIr4Q+a6Pu+5GEKoX6HNLzf4DrA+7vmOrNJK9TWI03kILbAf7lJJ3RE1CbbqH6UrIS/+o2fWLH1de7/eK0HpRjLawee2JmWHLtwq+k4sqBG0jpyoKVBLxYJgODE3lCrguzNcYFABbDx81UBvMUov9reZIHEFz2h6pPp7y7N2XRZYRphxC+Pk4pDdVDig/HYGr3h+ejrS5mzd3WeEt/3Jc8Y4UbhmiPtqJlctTY77u+4L6DqTY19np8aWqPdgCTSpTFzB1ATBcWWZouHs71wsh9m7n8xQa6qqVckw6MpcLBWJD/Ez8U5bCpQw67rRVOSdsTCVlHHbpv2+MsO26hT7OrnCT3ag0AAAAA=="}
-            },
-            {
-              "name": "Maraluxe Tropical Sunset",
-              "options": [{"label": "", "price": 800}],
-              "tags": ["Signature"],
-              "image": {"t": "data:image/webp;base64,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"}
-            }
-          ]
-        },
-        {
-          "name": "Classic Cocktails",
-          "items": [
-            {"name": "Adios", "options": [{"label": "Standard", "price": 900}, {"label": "Double", "price": 1200}]},
-            {"name": "Cosmopolitan", "options": [{"label": "", "price": 600}]},
-            {"name": "Dirty Martini", "options": [{"label": "", "price": 700}]},
-            {"name": "Dry Martini", "options": [{"label": "", "price": 600}]},
-            {"name": "Gin & Tonic", "options": [{"label": "", "price": 500}]},
-            {"name": "Jäger Bomb", "options": [{"label": "", "price": 650}]},
-            {"name": "Long Island Iced Tea", "options": [{"label": "Standard", "price": 900}, {"label": "Double", "price": 1200}]},
-            {"name": "Margarita", "options": [{"label": "", "price": 600}]},
-            {"name": "Mojito", "options": [{"label": "", "price": 600}]},
-            {"name": "Old Fashioned", "options": [{"label": "", "price": 700}]},
-            {"name": "Piña Colada", "options": [{"label": "", "price": 800}]},
-            {"name": "Sangria", "options": [{"label": "", "price": 600}]},
-            {"name": "Screwdriver", "options": [{"label": "", "price": 550}]},
-            {"name": "Sex On The Beach", "options": [{"label": "", "price": 650}]},
-            {"name": "Whiskey Sour", "options": [{"label": "", "price": 550}]}
-          ]
-        },
-        {
-          "name": "Mocktails",
-          "items": [
-            {"name": "Blue Ocean", "options": [{"label": "", "price": 600}]},
-            {"name": "Mango Delight", "options": [{"label": "", "price": 500}]},
-            {"name": "Rainbow Mocktail", "options": [{"label": "", "price": 600}]},
-            {"name": "Tropical Punch", "options": [{"label": "", "price": 550}]},
-            {"name": "Virgin Mojito", "options": [{"label": "", "price": 500}]},
-            {"name": "Virgin Piña Colada", "options": [{"label": "", "price": 500}]}
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Beer & Cider",
-      "hidden": false,
-      "categories": [
-        {
-          "name": "Beers",
-          "items": [
-            {"name": "Balozi", "options": [{"label": "Bottle", "price": 350}]},
-            {"name": "Guinness", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
-            {"name": "Heineken", "options": [{"label": "Bottle", "price": 400}, {"label": "Can", "price": 560}]},
-            {"name": "Pilsner Lager", "options": [{"label": "Bottle", "price": 350}]},
-            {"name": "Tusker Lager", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 450}]},
-            {"name": "Tusker Lite", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
-            {"name": "Tusker Malt", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
-            {"name": "White Cap", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]}
-          ]
-        },
-        {
-          "name": "Ciders & Ready-to-Drink",
-          "items": [
-            {"name": "Guarana", "options": [{"label": "Can", "price": 400}]},
-            {"name": "Hunters Dry", "options": [{"label": "Bottle", "price": 400}]},
-            {"name": "Manyatta Pineapple", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
-            {"name": "Savanna", "options": [{"label": "Bottle", "price": 450}]},
-            {"name": "Smirnoff Black Ice", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 400}]},
-            {"name": "Smirnoff Pineapple Punch", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 400}]},
-            {"name": "Smirnoff Raspberry Twist", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 400}]},
-            {"name": "Tusker Cider", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]}
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Spirits",
-      "hidden": false,
-      "categories": [
-        {
-          "name": "Whisky",
-          "items": [
-            {"name": "Ballantine's", "options": [{"label": "750ml", "price": 5500}, {"label": "1L", "price": 7000}]},
-            {"name": "Bond 7", "options": [{"label": "750ml", "price": 2500}]},
-            {"name": "Famous Grouse", "options": [{"label": "750ml", "price": 5000}, {"label": "1L", "price": 6000}]},
-            {"name": "Glenfiddich", "options": [{"label": "700ml", "price": 11000}, {"label": "1L", "price": 13500}]},
-            {"name": "Grant's", "options": [{"label": "750ml", "price": 3900}, {"label": "1L", "price": 4500}]},
-            {"name": "Jack Daniel's", "options": [{"label": "700ml", "price": 5500}, {"label": "1L", "price": 7000}]},
-            {"name": "Jameson Irish Whiskey", "options": [{"label": "750ml", "price": 5500}, {"label": "1L", "price": 6500}]},
-            {"name": "Johnnie Walker Black Label", "options": [{"label": "750ml", "price": 7000}, {"label": "1L", "price": 8000}]},
-            {"name": "Johnnie Walker Double Black", "options": [{"label": "750ml", "price": 7500}, {"label": "1L", "price": 9000}]},
-            {"name": "Johnnie Walker Gold Label", "options": [{"label": "750ml", "price": 13600}]},
-            {"name": "Johnnie Walker Green Label", "options": [{"label": "750ml", "price": 13800}]},
-            {"name": "Johnnie Walker Red Label", "options": [{"label": "750ml", "price": 4200}, {"label": "1L", "price": 5000}]},
-            {"name": "The Singleton", "options": [{"label": "750ml", "price": 10000}]},
-            {"name": "VAT 69", "options": [{"label": "375ml", "price": 1800}, {"label": "750ml", "price": 4000}]}
-          ]
-        },
-        {
-          "name": "Vodka",
-          "items": [
-            {"name": "Flirt", "options": [{"label": "700ml", "price": 2700}]},
-            {"name": "KC Ginger", "options": [{"label": "750ml", "price": 1650}]},
-            {"name": "KC Pineapple", "options": [{"label": "750ml", "price": 1650}]},
-            {"name": "KC Smooth", "options": [{"label": "750ml", "price": 1650}]},
-            {"name": "Smirnoff Red", "options": [{"label": "350ml", "price": 1250}, {"label": "750ml", "price": 2900}, {"label": "1L", "price": 3800}]}
-          ]
-        },
-        {
-          "name": "Gin",
-          "items": [
-            {"name": "Gilbey's", "options": [{"label": "350ml", "price": 1250}, {"label": "750ml", "price": 3600}]},
-            {"name": "Gordon's", "options": [{"label": "350ml", "price": 1800}, {"label": "750ml", "price": 4500}, {"label": "1L", "price": 5500}]},
-            {"name": "Malfy Gin Rosa", "options": [{"label": "750ml", "price": 8000}]}
-          ]
-        },
-        {
-          "name": "Rum",
-          "items": [
-            {"name": "Bacardi Blanca (Clear)", "options": [{"label": "750ml", "price": 4000}]},
-            {"name": "Bacardi Gold", "options": [{"label": "750ml", "price": 5000}]},
-            {"name": "Captain Morgan Gold", "options": [{"label": "750ml", "price": 2700}]},
-            {"name": "Captain Morgan Spiced", "options": [{"label": "750ml", "price": 4500}]},
-            {"name": "Malibu", "options": [{"label": "700ml", "price": 5500}, {"label": "1L", "price": 7500}]}
-          ]
-        },
-        {
-          "name": "Tequila",
-          "items": [
-            {"name": "Astral Blanco", "options": [{"label": "750ml", "price": 6500}]},
-            {"name": "Astral Reposado", "options": [{"label": "750ml", "price": 6500}]},
-            {"name": "Camino Clear", "options": [{"label": "750ml", "price": 4000}]},
-            {"name": "Camino Gold", "options": [{"label": "750ml", "price": 4000}]},
-            {"name": "Don Julio Añejo", "options": [{"label": "750ml", "price": 15900}]},
-            {"name": "Don Julio Blanco", "options": [{"label": "750ml", "price": 13200}]},
-            {"name": "Don Julio Reposado", "options": [{"label": "750ml", "price": 14400}]},
-            {"name": "Jose Cuervo Gold", "options": [{"label": "750ml", "price": 4500}]},
-            {"name": "Jose Cuervo Silver", "options": [{"label": "750ml", "price": 4500}]}
-          ]
-        },
-        {
-          "name": "Brandy & Cognac",
-          "items": [
-            {"name": "Hennessy VS", "options": [{"label": "700ml", "price": 7500}]},
-            {"name": "Hennessy VSOP", "options": [{"label": "750ml", "price": 13000}, {"label": "1L", "price": 18900}]},
-            {"name": "Hennessy XO", "options": [{"label": "700ml", "price": 50000}]},
-            {"name": "Martell VS", "options": [{"label": "700ml", "price": 9000}, {"label": "1L", "price": 11500}]},
-            {"name": "Martell VSOP", "options": [{"label": "700ml", "price": 18000}, {"label": "1L", "price": 20000}]},
-            {"name": "Richot", "options": [{"label": "350ml", "price": 1250}, {"label": "750ml", "price": 2900}]},
-            {"name": "Viceroy", "options": [{"label": "375ml", "price": 1600}, {"label": "750ml", "price": 2500}]}
-          ]
-        },
-        {
-          "name": "Liqueurs & Soju",
-          "items": [
-            {"name": "Amarula Cream", "options": [{"label": "750ml", "price": 5000}]},
-            {"name": "Baileys Irish Cream", "options": [{"label": "750ml", "price": 5000}]},
-            {"name": "Best Cream", "options": [{"label": "750ml", "price": 4500}]},
-            {"name": "Jägermeister", "options": [{"label": "1L", "price": 6500}]},
-            {"name": "Kahlúa Coffee Liqueur", "options": [{"label": "750ml", "price": 6000}]},
-            {"name": "Southern Comfort", "options": [{"label": "1L", "price": 5000}]},
-            {"name": "Jinro Soju", "options": [{"label": "360ml", "price": 600}]}
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Wine",
-      "hidden": false,
-      "categories": [
-        {
-          "name": "Sparkling & Champagne",
-          "items": [
-            {"name": "Luc Belaire Brut Gold", "options": [{"label": "750ml", "price": 12000}]},
-            {"name": "Luc Belaire Luxe Rosé", "options": [{"label": "750ml", "price": 12000}]},
-            {"name": "Luc Belaire Rare Luxe", "options": [{"label": "750ml", "price": 12000}]},
-            {"name": "Luc Belaire Rare Rosé", "options": [{"label": "750ml", "price": 12000}]}
-          ]
-        },
-        {
-          "name": "Red Wine",
-          "items": [
-            {"name": "4th Street Sweet Red", "options": [{"label": "750ml", "price": 1400}]},
-            {"name": "Caprice Sweet Red", "options": [{"label": "1L", "price": 1400}]},
-            {"name": "Nederburg Cabernet Sauvignon", "options": [{"label": "750ml", "price": 3000}]},
-            {"name": "Nederburg Merlot", "options": [{"label": "750ml", "price": 3500}]},
-            {"name": "Robertson Winery Red", "options": [{"label": "750ml", "price": 3000}]}
-          ]
-        },
-        {
-          "name": "White Wine",
-          "items": [
-            {"name": "4th Street Sweet White", "options": [{"label": "750ml", "price": 1400}]},
-            {"name": "Caprice Sweet White", "options": [{"label": "1L", "price": 1400}]},
-            {"name": "Nederburg Sauvignon Blanc", "options": [{"label": "750ml", "price": 3000}]},
-            {"name": "Robertson Winery White", "options": [{"label": "750ml", "price": 3000}]}
-          ]
-        },
-        {
-          "name": "Wine by the Glass",
-          "items": [
-            {"name": "Cellar Cask Red", "options": [{"label": "Glass", "price": 400}]},
-            {"name": "House Wine", "options": [{"label": "Glass", "price": 500}]}
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Shots & Singles",
-      "hidden": false,
-      "categories": [
-        {
-          "name": "30ml Measures",
-          "items": [
-            {"name": "Amarula", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Astral Blanco", "options": [{"label": "Single", "price": 200}]},
-            {"name": "Astral Reposado", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Baileys", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Ballantine's", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Camino Clear", "options": [{"label": "Single", "price": 200}]},
-            {"name": "Camino Gold", "options": [{"label": "Single", "price": 200}]},
-            {"name": "Don Julio Blanco", "options": [{"label": "Single", "price": 500}]},
-            {"name": "Don Julio Reposado", "options": [{"label": "Single", "price": 550}]},
-            {"name": "Gilbey's", "options": [{"label": "Single", "price": 150}]},
-            {"name": "Gordon's", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Hennessy VS", "options": [{"label": "Single", "price": 350}]},
-            {"name": "Jack Daniel's", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Jägermeister", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Jameson", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Johnnie Walker Black Label", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Johnnie Walker Double Black", "options": [{"label": "Single", "price": 300}]},
-            {"name": "Johnnie Walker Red Label", "options": [{"label": "Single", "price": 200}]},
-            {"name": "Jose Cuervo Gold", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Jose Cuervo Silver", "options": [{"label": "Single", "price": 250}]},
-            {"name": "Malibu", "options": [{"label": "Single", "price": 200}]},
-            {"name": "Smirnoff", "options": [{"label": "Single", "price": 200}]},
-            {"name": "Southern Comfort", "options": [{"label": "Single", "price": 250}]}
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Soft Drinks",
-      "hidden": false,
-      "categories": [
-        {
-          "name": "Water",
-          "items": [
-            {"name": "Dasani Mineral Water", "options": [{"label": "500ml", "price": 100}, {"label": "1L", "price": 200}]},
-            {"name": "Keringet Mineral Water", "options": [{"label": "500ml", "price": 100}, {"label": "1L", "price": 200}]}
-          ]
-        },
-        {
-          "name": "Juices",
-          "items": [
-            {"name": "Afya Mango", "options": [{"label": "500ml", "price": 150}]},
-            {"name": "Afya Mixed Fruit", "options": [{"label": "500ml", "price": 150}]},
-            {"name": "Del Monte", "options": [{"label": "1L", "price": 450}]},
-            {"name": "Minute Maid Apple", "options": [{"label": "400ml", "price": 150}]},
-            {"name": "Minute Maid Mango", "options": [{"label": "400ml", "price": 150}]},
-            {"name": "Minute Maid Tropical", "options": [{"label": "400ml", "price": 150}]}
-          ]
-        },
-        {
-          "name": "Sodas, Mixers & Energy",
-          "items": [
-            {"name": "Assorted Soda (Glass)", "options": [{"label": "300ml", "price": 100}]},
-            {"name": "Soda (PET Bottle)", "options": [{"label": "500ml", "price": 200}, {"label": "1.25L", "price": 400}]},
-            {"name": "Coca-Cola Share", "options": [{"label": "1.25L", "price": 400}]},
-            {"name": "Gofrut Mojito", "options": [{"label": "", "price": 400}]},
-            {"name": "Lemonade / Lime Cordial", "options": [{"label": "", "price": 100}]},
-            {"name": "Red Bull Energy", "options": [{"label": "250ml", "price": 350}]}
-          ]
-        }
-      ]
-    }
-  ]
+const MENUS = {
+  bar: {
+    kicker: "Bar & Lounge Menu",
+    placeholder: "Search cocktails, single malts, wines…",
+    legal: "All prices are in Kenyan Shillings (Ksh.) · Please enjoy responsibly (18+)",
+    groups: [
+      {
+        "name": "Cocktails",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Signature Cocktails",
+            "items": [
+              {
+                "name": "Maraluxe Coconut Velvet",
+                "options": [{"label": "", "price": 1100}],
+                "tags": ["Signature"],
+                "image": {"t": "data:image/webp;base64,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"}
+              },
+              {
+                "name": "Maraluxe Mango Splash",
+                "options": [{"label": "", "price": 650}],
+                "tags": ["Signature"],
+                "image": {"t": "data:image/webp;base64,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"}
+              },
+              {
+                "name": "Maraluxe Oasis",
+                "options": [{"label": "", "price": 600}],
+                "tags": ["Signature"],
+                "image": {"t": "data:image/webp;base64,UklGRngEAABXRUJQVlA4IGwEAABQFACdASpcAFwAPlEgjkSjoiEVW1WoOAUEoAzfRazNygbX3WZAMPBLTyoZvTBlHSpznWjNhtnif24iQDrHTegZQ5QiK/SctfHCF6Cey0VwmabI3/0GzTydH6Oeo76MS9gRvLO7z/ihcAME3OZnScaCS4HCHgpLNLaWzsbStoZO0QQCyM5exggwtCPSvz7WksPoMWk9eU8nM3tLibpNdDhASqUO8IloVIZpIAAA55Z1CUXpE9e1V4Gf1p/KUbzIczLbaF6bIntyfM0+Uiw41lH6xK6DZeWJ813AafpdwRMZxizQx60g9HHzMXpG047YXL1/ik6PvbtCfhyL45df47/6+vtFuAqf2YmIzOf+csr7sOQn7V/WO4dJVNIVdYz9Y0BANEFfhjH25YedhKAKCDwm5dTrcZreA9ZvWx2rLx33Lj6lRh7nBaYMgS5xN4R/+xaTUxFghyHSO/IzCBryildW/UgYzCtmTBmnjknaje+Y8AXuWdeZBsOAbFnP/r8utOTLW61ouU6yOwIvEfYOSshZ5Wzedpx8gChiJdGuYCs+t0Zls6D2ypOWvhFXP9Ll7ONcxNgRV5yYEqjwGjOqJH2lO+7WbT+EP+SBlwammAz8IbzcCoR0oKh04WxSvR6HumZlGiIc13qrDMrt8nArXOUaSsGtfrhIwYOyaic2Tcu5tKIz5bmSsF5nLxDTxjkCmd5NeVzk/7XVX0RWTdwOjdmZ+MbWmD7tm8ewvfsZGtFyhDNRg9E4veJ0wtV4os7b0zjR0SUIjZEjHIOG+wM/FDyleSEfcfqyE6GLTvIqesW44zq2c0SiIy6uKTyLOkbELSXWonqAnXsU+P8bR9SDhUGoQLGEHh4kUgm4tMtrFwmd54YXf2xBQ9/5m+efHfn1aYy4EEjtzTRl9pPUlY+uXVFslsUGoXUmDvNrq4Sz/Xqw923kJfW+0FotqApUwzdEpvMw4Wx5p7C0YZIfwl1ub+YE/1JwKsUAvdX2QGTeggD0KkEFpogI+QGhlOJvnw61yb8QxVd1MFYs0kl320WN5Mo/yPNx8M0srL3ZO8SByYWgALzThX7047HoUJ8ueTEakHU5Kf7Kiw5NO1gX5vbGvN5m6F60w8KYfBBi5KBhaV7NOOT2nkzRb8jCN85uAjIYBAlFcchV4iJLIhCGiC5hYNG0f5LLCo/lFR1L6nv4532YDBcMEPnGiDRKh01sLyAds1CpYRsS+wB+L3Hdcb45b6vv1hsFc/9F2HCGhbF/4Bf6B8PkWI0d57tEf4v10QpPAwP0ZV1rmWSzN9jNh8nUQ90AtjisWmkP4oRmij1itm3nnH5391UaeEciGQBHQ/o04P2Zy9cjbvZdzAQ3vMMvJBJt3KWqdky7b8/V3iSmy5RvIg2+p4GubD0UnYg+H6Eazinzp1P0oaeR9KNKKlXgZR3qa0qS3OXvjCOeZJNV9KjCVMdhpt3DWt/Xujvi31eL+pAj09NvhIaTPPxc1PDoC4E/308AEYzAr5qdqAAA"}
+              },
+              {
+                "name": "Maraluxe Strawberry Bliss",
+                "options": [{"label": "", "price": 600}],
+                "tags": ["Signature"],
+                "image": {"t": "data:image/webp;base64,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"}
+              },
+              {
+                "name": "Maraluxe Tropical Sunset",
+                "options": [{"label": "", "price": 800}],
+                "tags": ["Signature"],
+                "image": {"t": "data:image/webp;base64,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"}
+              }
+            ]
+          },
+          {
+            "name": "Classic Cocktails",
+            "items": [
+              {"name": "Adios", "options": [{"label": "Standard", "price": 900}, {"label": "Double", "price": 1200}]},
+              {"name": "Cosmopolitan", "options": [{"label": "", "price": 600}]},
+              {"name": "Dirty Martini", "options": [{"label": "", "price": 700}]},
+              {"name": "Dry Martini", "options": [{"label": "", "price": 600}]},
+              {"name": "Gin & Tonic", "options": [{"label": "", "price": 500}]},
+              {"name": "Jäger Bomb", "options": [{"label": "", "price": 650}]},
+              {"name": "Long Island Iced Tea", "options": [{"label": "Standard", "price": 900}, {"label": "Double", "price": 1200}]},
+              {"name": "Margarita", "options": [{"label": "", "price": 600}]},
+              {"name": "Mojito", "options": [{"label": "", "price": 600}]},
+              {"name": "Old Fashioned", "options": [{"label": "", "price": 700}]},
+              {"name": "Piña Colada", "options": [{"label": "", "price": 800}]},
+              {"name": "Sangria", "options": [{"label": "", "price": 600}]},
+              {"name": "Screwdriver", "options": [{"label": "", "price": 550}]},
+              {"name": "Sex On The Beach", "options": [{"label": "", "price": 650}]},
+              {"name": "Whiskey Sour", "options": [{"label": "", "price": 550}]}
+            ]
+          },
+          {
+            "name": "Mocktails",
+            "items": [
+              {"name": "Blue Ocean", "options": [{"label": "", "price": 600}]},
+              {"name": "Mango Delight", "options": [{"label": "", "price": 500}]},
+              {"name": "Rainbow Mocktail", "options": [{"label": "", "price": 600}]},
+              {"name": "Tropical Punch", "options": [{"label": "", "price": 550}]},
+              {"name": "Virgin Mojito", "options": [{"label": "", "price": 500}]},
+              {"name": "Virgin Piña Colada", "options": [{"label": "", "price": 500}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Beer & Cider",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Beers",
+            "items": [
+              {"name": "Balozi", "options": [{"label": "Bottle", "price": 350}]},
+              {"name": "Guinness", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
+              {"name": "Heineken", "options": [{"label": "Bottle", "price": 400}, {"label": "Can", "price": 560}]},
+              {"name": "Pilsner Lager", "options": [{"label": "Bottle", "price": 350}]},
+              {"name": "Tusker Lager", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 450}]},
+              {"name": "Tusker Lite", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
+              {"name": "Tusker Malt", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
+              {"name": "White Cap", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]}
+            ]
+          },
+          {
+            "name": "Ciders & Ready-to-Drink",
+            "items": [
+              {"name": "Guarana", "options": [{"label": "Can", "price": 400}]},
+              {"name": "Hunters Dry", "options": [{"label": "Bottle", "price": 400}]},
+              {"name": "Manyatta Pineapple", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]},
+              {"name": "Savanna", "options": [{"label": "Bottle", "price": 450}]},
+              {"name": "Smirnoff Black Ice", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 400}]},
+              {"name": "Smirnoff Pineapple Punch", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 400}]},
+              {"name": "Smirnoff Raspberry Twist", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 400}]},
+              {"name": "Tusker Cider", "options": [{"label": "Bottle", "price": 350}, {"label": "Can", "price": 500}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Spirits",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Whisky",
+            "items": [
+              {"name": "Ballantine's", "options": [{"label": "750ml", "price": 5500}, {"label": "1L", "price": 7000}]},
+              {"name": "Bond 7", "options": [{"label": "750ml", "price": 2500}]},
+              {"name": "Famous Grouse", "options": [{"label": "750ml", "price": 5000}, {"label": "1L", "price": 6000}]},
+              {"name": "Glenfiddich", "options": [{"label": "700ml", "price": 11000}, {"label": "1L", "price": 13500}]},
+              {"name": "Grant's", "options": [{"label": "750ml", "price": 3900}, {"label": "1L", "price": 4500}]},
+              {"name": "Jack Daniel's", "options": [{"label": "700ml", "price": 5500}, {"label": "1L", "price": 7000}]},
+              {"name": "Jameson Irish Whiskey", "options": [{"label": "750ml", "price": 5500}, {"label": "1L", "price": 6500}]},
+              {"name": "Johnnie Walker Black Label", "options": [{"label": "750ml", "price": 7000}, {"label": "1L", "price": 8000}]},
+              {"name": "Johnnie Walker Double Black", "options": [{"label": "750ml", "price": 7500}, {"label": "1L", "price": 9000}]},
+              {"name": "Johnnie Walker Gold Label", "options": [{"label": "750ml", "price": 13600}]},
+              {"name": "Johnnie Walker Green Label", "options": [{"label": "750ml", "price": 13800}]},
+              {"name": "Johnnie Walker Red Label", "options": [{"label": "750ml", "price": 4200}, {"label": "1L", "price": 5000}]},
+              {"name": "The Singleton", "options": [{"label": "750ml", "price": 10000}]},
+              {"name": "VAT 69", "options": [{"label": "375ml", "price": 1800}, {"label": "750ml", "price": 4000}]}
+            ]
+          },
+          {
+            "name": "Vodka",
+            "items": [
+              {"name": "Flirt", "options": [{"label": "700ml", "price": 2700}]},
+              {"name": "KC Ginger", "options": [{"label": "750ml", "price": 1650}]},
+              {"name": "KC Pineapple", "options": [{"label": "750ml", "price": 1650}]},
+              {"name": "KC Smooth", "options": [{"label": "750ml", "price": 1650}]},
+              {"name": "Smirnoff Red", "options": [{"label": "350ml", "price": 1250}, {"label": "750ml", "price": 2900}, {"label": "1L", "price": 3800}]}
+            ]
+          },
+          {
+            "name": "Gin",
+            "items": [
+              {"name": "Gilbey's", "options": [{"label": "350ml", "price": 1250}, {"label": "750ml", "price": 3600}]},
+              {"name": "Gordon's", "options": [{"label": "350ml", "price": 1800}, {"label": "750ml", "price": 4500}, {"label": "1L", "price": 5500}]},
+              {"name": "Malfy Gin Rosa", "options": [{"label": "750ml", "price": 8000}]}
+            ]
+          },
+          {
+            "name": "Rum",
+            "items": [
+              {"name": "Bacardi Blanca (Clear)", "options": [{"label": "750ml", "price": 4000}]},
+              {"name": "Bacardi Gold", "options": [{"label": "750ml", "price": 5000}]},
+              {"name": "Captain Morgan Gold", "options": [{"label": "750ml", "price": 2700}]},
+              {"name": "Captain Morgan Spiced", "options": [{"label": "750ml", "price": 4500}]},
+              {"name": "Malibu", "options": [{"label": "700ml", "price": 5500}, {"label": "1L", "price": 7500}]}
+            ]
+          },
+          {
+            "name": "Tequila",
+            "items": [
+              {"name": "Astral Blanco", "options": [{"label": "750ml", "price": 6500}]},
+              {"name": "Astral Reposado", "options": [{"label": "750ml", "price": 6500}]},
+              {"name": "Camino Clear", "options": [{"label": "750ml", "price": 4000}]},
+              {"name": "Camino Gold", "options": [{"label": "750ml", "price": 4000}]},
+              {"name": "Don Julio Añejo", "options": [{"label": "750ml", "price": 15900}]},
+              {"name": "Don Julio Blanco", "options": [{"label": "750ml", "price": 13200}]},
+              {"name": "Don Julio Reposado", "options": [{"label": "750ml", "price": 14400}]},
+              {"name": "Jose Cuervo Gold", "options": [{"label": "750ml", "price": 4500}]},
+              {"name": "Jose Cuervo Silver", "options": [{"label": "750ml", "price": 4500}]}
+            ]
+          },
+          {
+            "name": "Brandy & Cognac",
+            "items": [
+              {"name": "Hennessy VS", "options": [{"label": "700ml", "price": 7500}]},
+              {"name": "Hennessy VSOP", "options": [{"label": "750ml", "price": 13000}, {"label": "1L", "price": 18900}]},
+              {"name": "Hennessy XO", "options": [{"label": "700ml", "price": 50000}]},
+              {"name": "Martell VS", "options": [{"label": "700ml", "price": 9000}, {"label": "1L", "price": 11500}]},
+              {"name": "Martell VSOP", "options": [{"label": "700ml", "price": 18000}, {"label": "1L", "price": 20000}]},
+              {"name": "Richot", "options": [{"label": "350ml", "price": 1250}, {"label": "750ml", "price": 2900}]},
+              {"name": "Viceroy", "options": [{"label": "375ml", "price": 1600}, {"label": "750ml", "price": 2500}]}
+            ]
+          },
+          {
+            "name": "Liqueurs & Soju",
+            "items": [
+              {"name": "Amarula Cream", "options": [{"label": "750ml", "price": 5000}]},
+              {"name": "Baileys Irish Cream", "options": [{"label": "750ml", "price": 5000}]},
+              {"name": "Best Cream", "options": [{"label": "750ml", "price": 4500}]},
+              {"name": "Jägermeister", "options": [{"label": "1L", "price": 6500}]},
+              {"name": "Kahlúa Coffee Liqueur", "options": [{"label": "750ml", "price": 6000}]},
+              {"name": "Southern Comfort", "options": [{"label": "1L", "price": 5000}]},
+              {"name": "Jinro Soju", "options": [{"label": "360ml", "price": 600}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Wine",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Sparkling & Champagne",
+            "items": [
+              {"name": "Luc Belaire Brut Gold", "options": [{"label": "750ml", "price": 12000}]},
+              {"name": "Luc Belaire Luxe Rosé", "options": [{"label": "750ml", "price": 12000}]},
+              {"name": "Luc Belaire Rare Luxe", "options": [{"label": "750ml", "price": 12000}]},
+              {"name": "Luc Belaire Rare Rosé", "options": [{"label": "750ml", "price": 12000}]}
+            ]
+          },
+          {
+            "name": "Red Wine",
+            "items": [
+              {"name": "4th Street Sweet Red", "options": [{"label": "750ml", "price": 1400}]},
+              {"name": "Caprice Sweet Red", "options": [{"label": "1L", "price": 1400}]},
+              {"name": "Nederburg Cabernet Sauvignon", "options": [{"label": "750ml", "price": 3000}]},
+              {"name": "Nederburg Merlot", "options": [{"label": "750ml", "price": 3500}]},
+              {"name": "Robertson Winery Red", "options": [{"label": "750ml", "price": 3000}]}
+            ]
+          },
+          {
+            "name": "White Wine",
+            "items": [
+              {"name": "4th Street Sweet White", "options": [{"label": "750ml", "price": 1400}]},
+              {"name": "Caprice Sweet White", "options": [{"label": "1L", "price": 1400}]},
+              {"name": "Nederburg Sauvignon Blanc", "options": [{"label": "750ml", "price": 3000}]},
+              {"name": "Robertson Winery White", "options": [{"label": "750ml", "price": 3000}]}
+            ]
+          },
+          {
+            "name": "Wine by the Glass",
+            "items": [
+              {"name": "Cellar Cask Red", "options": [{"label": "Glass", "price": 400}]},
+              {"name": "House Wine", "options": [{"label": "Glass", "price": 500}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Shots & Singles",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "30ml Measures",
+            "items": [
+              {"name": "Amarula", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Astral Blanco", "options": [{"label": "Single", "price": 200}]},
+              {"name": "Astral Reposado", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Baileys", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Ballantine's", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Camino Clear", "options": [{"label": "Single", "price": 200}]},
+              {"name": "Camino Gold", "options": [{"label": "Single", "price": 200}]},
+              {"name": "Don Julio Blanco", "options": [{"label": "Single", "price": 500}]},
+              {"name": "Don Julio Reposado", "options": [{"label": "Single", "price": 550}]},
+              {"name": "Gilbey's", "options": [{"label": "Single", "price": 150}]},
+              {"name": "Gordon's", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Hennessy VS", "options": [{"label": "Single", "price": 350}]},
+              {"name": "Jack Daniel's", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Jägermeister", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Jameson", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Johnnie Walker Black Label", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Johnnie Walker Double Black", "options": [{"label": "Single", "price": 300}]},
+              {"name": "Johnnie Walker Red Label", "options": [{"label": "Single", "price": 200}]},
+              {"name": "Jose Cuervo Gold", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Jose Cuervo Silver", "options": [{"label": "Single", "price": 250}]},
+              {"name": "Malibu", "options": [{"label": "Single", "price": 200}]},
+              {"name": "Smirnoff", "options": [{"label": "Single", "price": 200}]},
+              {"name": "Southern Comfort", "options": [{"label": "Single", "price": 250}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Soft Drinks",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Water",
+            "items": [
+              {"name": "Dasani Mineral Water", "options": [{"label": "500ml", "price": 100}, {"label": "1L", "price": 200}]},
+              {"name": "Keringet Mineral Water", "options": [{"label": "500ml", "price": 100}, {"label": "1L", "price": 200}]}
+            ]
+          },
+          {
+            "name": "Juices",
+            "items": [
+              {"name": "Afya Mango", "options": [{"label": "500ml", "price": 150}]},
+              {"name": "Afya Mixed Fruit", "options": [{"label": "500ml", "price": 150}]},
+              {"name": "Del Monte", "options": [{"label": "1L", "price": 450}]},
+              {"name": "Minute Maid Apple", "options": [{"label": "400ml", "price": 150}]},
+              {"name": "Minute Maid Mango", "options": [{"label": "400ml", "price": 150}]},
+              {"name": "Minute Maid Tropical", "options": [{"label": "400ml", "price": 150}]}
+            ]
+          },
+          {
+            "name": "Sodas, Mixers & Energy",
+            "items": [
+              {"name": "Assorted Soda (Glass)", "options": [{"label": "300ml", "price": 100}]},
+              {"name": "Soda (PET Bottle)", "options": [{"label": "500ml", "price": 200}, {"label": "1.25L", "price": 400}]},
+              {"name": "Coca-Cola Share", "options": [{"label": "1.25L", "price": 400}]},
+              {"name": "Gofrut Mojito", "options": [{"label": "", "price": 400}]},
+              {"name": "Lemonade / Lime Cordial", "options": [{"label": "", "price": 100}]},
+              {"name": "Red Bull Energy", "options": [{"label": "250ml", "price": 350}]}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  food: {
+    kicker: "Restaurant & Dining Menu",
+    placeholder: "Search steaks, biryani, platters, pizza…",
+    legal: "All prices are in Kenyan Shillings (Ksh.) · Freshly prepared to order at Maraluxe",
+    groups: [
+      {
+        "name": "Breakfast",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Full Breakfasts",
+            "items": [
+              {
+                "name": "Maraluxe Breakfast",
+                "description": "Fresh juice, fruits, egg with sausage or samosa, sweet potatoes or arrowroots, baked beans, mandazi or doughnut and a hot beverage.",
+                "tags": ["Signature"],
+                "options": [{"label": "", "price": 1200}]
+              },
+              {
+                "name": "Country Breakfast",
+                "description": "Fresh juice, fruits, pancakes, mini mandazi, sausage, sweet potatoes or arrowroots, and fried eggs.",
+                "options": [{"label": "", "price": 1000}]
+              },
+              {
+                "name": "Maraluxe Sunrise Saver",
+                "description": "A simple, energizing combo of mixed tea, sausage, eggs, and toast.",
+                "options": [{"label": "", "price": 500}]
+              }
+            ]
+          },
+          {
+            "name": "Morning Bites",
+            "items": [
+              {"name": "French Toast", "options": [{"label": "", "price": 200}]},
+              {"name": "Eggs (Made to your liking)", "options": [{"label": "", "price": 200}]},
+              {"name": "Omelette (Spanish or Plain)", "options": [{"label": "", "price": 250}]},
+              {"name": "Beef Sausages", "options": [{"label": "2 pcs", "price": 200}]},
+              {"name": "Beef Samosas", "options": [{"label": "2 pcs", "price": 200}]},
+              {"name": "Doughnut / Mandazi", "options": [{"label": "2 pcs", "price": 200}]},
+              {"name": "Fluffy Pancakes", "options": [{"label": "2 pcs", "price": 250}]},
+              {"name": "Chicken / Vegetable Spring Rolls", "options": [{"label": "", "price": 250}]},
+              {"name": "House Cakes", "description": "Marble, Vanilla, or Fruit cake.", "options": [{"label": "Slice", "price": 250}]}
+            ]
+          },
+          {
+            "name": "Hot Beverages",
+            "items": [
+              {"name": "Mixed Tea", "options": [{"label": "", "price": 250}]},
+              {"name": "Black Tea", "options": [{"label": "", "price": 200}]},
+              {"name": "Kenyan Dawa", "description": "Hot honey, lemon, and ginger infusion.", "options": [{"label": "", "price": 300}]},
+              {"name": "Herbal Tea", "description": "Choice of Lemon, Masala, Hibiscus, or Mint.", "options": [{"label": "", "price": 300}]},
+              {"name": "House Coffee", "options": [{"label": "", "price": 300}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Starters & Wraps",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Fresh Salads",
+            "items": [
+              {
+                "name": "Caesar Salad",
+                "description": "Crisp lettuce, chicken strips, tomatoes, cheese, onions, bell peppers, cucumbers, and apples in a creamy Caesar dressing.",
+                "options": [{"label": "", "price": 600}]
+              },
+              {
+                "name": "Greek Salad",
+                "description": "Feta cheese, onions, bell peppers, cucumber, tomatoes, and sweet corn tossed in dressing.",
+                "options": [{"label": "", "price": 600}]
+              },
+              {
+                "name": "Maraluxe Garden Salad",
+                "description": "A fresh mix of lettuce, tomatoes, cucumber, onions, carrots, and avocado with light dressing.",
+                "options": [{"label": "", "price": 400}]
+              },
+              {
+                "name": "Kachumbari",
+                "description": "Kenyan-style tomato and onion salad with lemon dressing and fresh coriander.",
+                "options": [{"label": "", "price": 300}]
+              }
+            ]
+          },
+          {
+            "name": "Soups",
+            "items": [
+              {
+                "name": "Minestrone Soup",
+                "description": "Classic vegetable soup cooked with herbs in a rich tomato base.",
+                "options": [{"label": "", "price": 400}]
+              },
+              {
+                "name": "Cream of Mushroom",
+                "description": "Thick, creamy mushroom soup cooked with herbs and cream, topped with croutons.",
+                "options": [{"label": "", "price": 300}]
+              },
+              {
+                "name": "Cream of Butternut",
+                "description": "Smooth and creamy butternut soup cooked in mild spices, topped with croutons.",
+                "options": [{"label": "", "price": 300}]
+              },
+              {
+                "name": "Clear Bone Soup",
+                "description": "Slow-cooked bone broth infused with herbs. Served with chapati.",
+                "options": [{"label": "", "price": 450}]
+              }
+            ]
+          },
+          {
+            "name": "Wraps & Quesadillas",
+            "items": [
+              {
+                "name": "Chicken Wrap",
+                "description": "Tender marinated chicken strips sautéed with bell peppers and wrapped in a warm tortilla.",
+                "options": [{"label": "", "price": 600}]
+              },
+              {
+                "name": "Beef Wrap",
+                "description": "Juicy beef strips cooked with sweet peppers and herbs, wrapped in a soft tortilla.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Vegetarian Wrap",
+                "description": "Fresh seasonal vegetables stir-fried and wrapped in a warm tortilla for a light, healthy bite.",
+                "options": [{"label": "", "price": 500}]
+              },
+              {
+                "name": "Mexican Quesadilla",
+                "description": "Grilled tortilla filled with diced chicken or beef and melted cheese, toasted until golden.",
+                "options": [{"label": "", "price": 800}]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rice, Curries & Pasta",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Biryani, Pilau & Rice",
+            "items": [
+              {
+                "name": "Chicken Biryani",
+                "description": "Swahili-style biryani with tender chicken, fragrant rice, spices and rich gravy.",
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "Chicken Pilau",
+                "description": "Aromatic spiced rice cooked with tender chicken.",
+                "options": [{"label": "", "price": 800}]
+              },
+              {
+                "name": "Beef Biryani",
+                "description": "Swahili-style biryani with tender beef, fragrant rice, spices and rich gravy.",
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "Beef Pilau",
+                "description": "Aromatic spiced rice cooked with tender beef.",
+                "options": [{"label": "", "price": 800}]
+              },
+              {
+                "name": "Mutton Biryani",
+                "description": "Swahili-style biryani with tender mutton, fragrant rice, spices and rich gravy.",
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "Mutton Pilau",
+                "description": "Aromatic spiced rice cooked with tender mutton.",
+                "options": [{"label": "", "price": 800}]
+              },
+              {
+                "name": "Vegetable Pilau",
+                "description": "Spiced rice cooked with mixed vegetables, herbs and spices.",
+                "options": [{"label": "", "price": 600}]
+              },
+              {
+                "name": "Vegetable Fried Rice",
+                "description": "Fried rice with mixed vegetables, mild spices and soy sauce.",
+                "options": [{"label": "", "price": 500}]
+              }
+            ]
+          },
+          {
+            "name": "Specialty Curries",
+            "items": [
+              {
+                "name": "Chilly Paneer Curry",
+                "description": "Cottage cheese simmered in rich Indian curry sauce.",
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "House Curries",
+                "description": "Choice of Beef, Chicken, or Vegetable curry.",
+                "options": [{"label": "", "price": 900}]
+              }
+            ]
+          },
+          {
+            "name": "Noodles & Italian Corner",
+            "items": [
+              {
+                "name": "Stir-Fried Chicken Noodles",
+                "description": "Stir-fried noodles with vegetables and chicken, served with chips.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Stir-Fried Beef Noodles",
+                "description": "Savory stir-fried noodles with beef and vegetables, served with chips.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Spaghetti Bolognese",
+                "description": "Spaghetti in rich slow-simmered tomato beef sauce.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Spaghetti Pomodoro",
+                "description": "Spaghetti served in rich tomato and mushroom sauce seasoned with herbs.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Spaghetti Carbonara",
+                "description": "Creamy spaghetti with cheese and herbs.",
+                "options": [{"label": "", "price": 700}]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Burgers & Bites",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Gourmet Burgers",
+            "items": [
+              {
+                "name": "Maraluxe Classic Double Burger",
+                "description": "House signature double burger (Beef & Chicken) layered with cheese, lettuce and tomatoes.",
+                "tags": ["Signature"],
+                "options": [{"label": "", "price": 1000}]
+              },
+              {
+                "name": "Beef Burger",
+                "description": "Juicy beef patty with lettuce, tomatoes, caramelized onions and cucumber.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Chicken Burger",
+                "description": "Grilled chicken patty with lettuce, caramelized onions, tomatoes and cucumber.",
+                "options": [{"label": "", "price": 600}]
+              },
+              {
+                "name": "Egg & Cheese Burger",
+                "description": "Sliced boiled egg, tomatoes, onions and melted cheese.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Burger Add-Ons",
+                "description": "Extra Cheese, Jalapeño, or Fried Egg.",
+                "options": [{"label": "Each", "price": 200}]
+              }
+            ]
+          },
+          {
+            "name": "Toasted Sandwiches",
+            "items": [
+              {
+                "name": "Maraluxe Club Sandwich",
+                "description": "Chicken, beef, lettuce, tomatoes and cheese layered on toasted bread.",
+                "tags": ["Signature"],
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "B.L.T. Sandwich",
+                "description": "Classic beef bacon, crisp lettuce and tomatoes on toasted bread.",
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "Beef Sandwich",
+                "description": "Tender beef with crisp lettuce, onions and tomatoes on toasted bread.",
+                "options": [{"label": "", "price": 800}]
+              },
+              {
+                "name": "Chicken Sandwich",
+                "description": "Juicy shredded chicken, lettuce, tomatoes, onions and cucumber on toasted bread.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Egg Sandwich",
+                "description": "Fried egg layered with lettuce, tomatoes and cucumber on toasted bread.",
+                "options": [{"label": "", "price": 700}]
+              }
+            ]
+          },
+          {
+            "name": "Quick Bites",
+            "items": [
+              {
+                "name": "Honey-Glazed Wings",
+                "description": "Juicy chicken wings coated in a sweet honey glaze, served with chips.",
+                "options": [{"label": "", "price": 800}]
+              },
+              {
+                "name": "Stir-Fried Wings",
+                "description": "Tender chicken wings tossed in flavorful stir-fry sauce, served with chips.",
+                "options": [{"label": "", "price": 700}]
+              },
+              {
+                "name": "Chicken Lollipop",
+                "description": "Deep-fried spicy chicken bites, served with chips.",
+                "options": [{"label": "", "price": 800}]
+              },
+              {
+                "name": "Meatballs with BBQ Sauce",
+                "description": "Tasty meatballs cooked in rich BBQ sauce.",
+                "options": [{"label": "", "price": 800}]
+              }
+            ]
+          },
+          {
+            "name": "Kids Corner",
+            "note": "All kids meals come served with chips and a soda.",
+            "items": [
+              {"name": "Kids Shawarma", "options": [{"label": "", "price": 650}]},
+              {"name": "Kids Cheese Burger", "options": [{"label": "", "price": 600}]},
+              {"name": "Chicken Nuggets", "options": [{"label": "6 pcs", "price": 600}]},
+              {"name": "Mini Pizza", "options": [{"label": "", "price": 600}]},
+              {"name": "Kids Hot Dog", "options": [{"label": "", "price": 500}]},
+              {"name": "Kids Sausage", "options": [{"label": "2 pcs", "price": 500}]},
+              {"name": "Chicken Drumstick", "options": [{"label": "1 pc", "price": 500}]}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Steaks & Mains",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Sizzling Specialties",
+            "items": [
+              {
+                "name": "Jumbo T-Bone Steak",
+                "description": "Grilled to perfection, served with potato wedges or mashed potatoes and sauce.",
+                "options": [{"label": "", "price": 1200}]
+              },
+              {
+                "name": "Pepper Steak",
+                "description": "Succulent marinated grilled steak with signature pepper sauce, served with potato wedges or mashed potatoes.",
+                "options": [{"label": "", "price": 1100}]
+              },
+              {
+                "name": "Sirloin Steak",
+                "description": "Tender and juicy steak, served with sauce, potato wedges or mashed potatoes.",
+                "options": [{"label": "", "price": 1000}]
+              },
+              {
+                "name": "Minty Lamb Chops",
+                "description": "Grilled lamb chops with mint sauce, served with potato wedges or mashed potatoes.",
+                "options": [{"label": "", "price": 1100}]
+              },
+              {
+                "name": "Ossobuco (Tumbukiza)",
+                "description": "Slow-simmered tender beef on the bone with garden vegetables.",
+                "options": [{"label": "", "price": 1000}]
+              }
+            ]
+          },
+          {
+            "name": "Chicken Favorites & Kienyeji",
+            "items": [
+              {
+                "name": "Organic Chicken Kienyeji",
+                "description": "Free-range chicken prepared Wet Fry, Dry Fry, or Choma.",
+                "options": [
+                  {"label": "1/4", "price": 900},
+                  {"label": "1/2", "price": 1500},
+                  {"label": "Whole", "price": 3000}
+                ]
+              },
+              {
+                "name": "Supreme Plain Chicken & Chips",
+                "description": "Whole chicken option includes 2 portions of chips.",
+                "options": [
+                  {"label": "1/4", "price": 800},
+                  {"label": "1/2", "price": 1250},
+                  {"label": "Whole", "price": 2500}
+                ]
+              },
+              {
+                "name": "Chicken Maryland",
+                "description": "Crispy breaded chicken breast, served with chips or mashed potatoes.",
+                "options": [{"label": "", "price": 900}]
+              },
+              {
+                "name": "Rosemary Fried Chicken",
+                "description": "Rosemary chicken sautéed with onions and bell peppers, served with potato wedges, chips or mashed potatoes.",
+                "options": [{"label": "", "price": 800}]
+              }
+            ]
+          },
+          {
+            "name": "Beef & Goat Delicacies",
+            "note": "All served with accompaniments.",
+            "items": [
+              {
+                "name": "Tender Goat (Mbuzi)",
+                "description": "Prepared Wet Fry or Dry Fry.",
+                "options": [
+                  {"label": "1/4 kg", "price": 800},
+                  {"label": "1/2 kg", "price": 1250},
+                  {"label": "1 kg", "price": 2500}
+                ]
+              },
+              {
+                "name": "Savoury Beef",
+                "description": "Prepared Wet Fry or Dry Fry.",
+                "options": [
+                  {"label": "1/4 kg", "price": 800},
+                  {"label": "1/2 kg", "price": 1200},
+                  {"label": "1 kg", "price": 2000}
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Pork Zone",
+            "note": "Served with ugali, rice, mashed potatoes, chips or salad and seasonal veggies.",
+            "items": [
+              {
+                "name": "Sweet n’ Sour Pork",
+                "description": "Boneless pork cubes cooked in a rich sweet and sour sauce.",
+                "options": [{"label": "", "price": 1400}]
+              },
+              {
+                "name": "Grilled Pork Spare Ribs",
+                "options": [{"label": "", "price": 1300}]
+              },
+              {
+                "name": "Grilled Pork Chops",
+                "options": [{"label": "", "price": 1200}]
+              }
+            ]
+          },
+          {
+            "name": "Catch of the Day",
+            "items": [
+              {
+                "name": "Tilapia in Coconut Sauce",
+                "description": "Whole fish simmered in creamy coconut sauce, served with ugali, chapati or roast potatoes.",
+                "options": [{"label": "", "price": 1200}]
+              },
+              {
+                "name": "Whole Tilapia",
+                "description": "Dry, wet or poached fried whole fish served with ugali, chapati or roast potatoes, greens and kachumbari.",
+                "options": [{"label": "", "price": 1000}]
+              },
+              {
+                "name": "Pan-Fried Fish Fillet",
+                "description": "Lemon-infused fish fillet served with mashed potatoes or roast potatoes and tartar sauce.",
+                "options": [{"label": "", "price": 1000}]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Platters, Choma & Pizza",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Home of Platters",
+            "items": [
+              {
+                "name": "Mixed Grill Platter",
+                "description": "1/4 Grilled Chicken, Mutton Chops (1 portion), Potato Wedges, Chapati, Kachumbari & 300ml Soda.",
+                "options": [{"label": "", "price": 2000}]
+              },
+              {
+                "name": "Platter for 2",
+                "description": "1/2 Chicken, 1/4 Beef/Mutton, 2 Choma Sausages, 1 Portion Ugali, Roast Potatoes, Greens, Kachumbari & Fruits.",
+                "options": [{"label": "2 Guests", "price": 3000}]
+              },
+              {
+                "name": "Family Platter for 4",
+                "description": "Whole Chicken, 2 Choma Sausages, 1/2 kg Mbuzi Wet Fry, Roast Potatoes, Ugali, Mokimo or Rice, 2 Boiled Eggs, Kachumbari & Greens.",
+                "options": [{"label": "4 Guests", "price": 5000}]
+              },
+              {
+                "name": "Mega Platter for 6",
+                "description": "Whole Chicken (Broiler), 1 kg Beef/Mutton, Fish Fillet, 3 Choma Sausages, Ugali (3 portions), Mokimo or Chapati, Roast Potatoes (3 portions), Greens & Kachumbari.",
+                "tags": ["Feast"],
+                "options": [{"label": "6 Guests", "price": 7000}]
+              }
+            ]
+          },
+          {
+            "name": "Choma Corner",
+            "items": [
+              {
+                "name": "Whole Goat Production (15 kg)",
+                "description": "Served with 5 portions of ugali, 4 portions of roast potatoes, and kachumbari.",
+                "tags": ["Group Feast"],
+                "options": [{"label": "15 kg", "price": 25000}]
+              },
+              {
+                "name": "Whole Goat Hand",
+                "description": "Served with 3 portions of ugali and kachumbari.",
+                "options": [{"label": "", "price": 3000}]
+              },
+              {
+                "name": "Whole Chicken Kienyeji Choma",
+                "description": "Served with 2 portions of ugali and kachumbari.",
+                "options": [{"label": "", "price": 3000}]
+              },
+              {
+                "name": "Beef Skewers",
+                "description": "Tender marinated beef cubes grilled on skewers, seasoned and served with kachumbari.",
+                "options": [{"label": "", "price": 500}]
+              },
+              {
+                "name": "Chicken Skewers",
+                "description": "Tender marinated chicken cubes grilled on skewers, seasoned and served with kachumbari.",
+                "options": [{"label": "", "price": 400}]
+              },
+              {
+                "name": "Mutteta Soup",
+                "description": "A traditional hearty slow-cooked Kenyan soup.",
+                "options": [{"label": "", "price": 300}]
+              },
+              {
+                "name": "Grilled Choma Sausage",
+                "description": "Juicy Kenyan-style sausage grilled to perfection and served with kachumbari.",
+                "options": [{"label": "", "price": 150}]
+              }
+            ]
+          },
+          {
+            "name": "Pizzeria Corner",
+            "items": [
+              {
+                "name": "The Maraluxe Pizza",
+                "description": "Ground beef, sausage, and mozzarella cheese.",
+                "tags": ["Signature"],
+                "options": [
+                  {"label": "Med 12\"", "price": 1000},
+                  {"label": "Lrg 14\"", "price": 1300}
+                ]
+              },
+              {
+                "name": "Kuku Love Pizza",
+                "description": "Marinated chicken, onions, BBQ sauce and mozzarella cheese.",
+                "options": [
+                  {"label": "Med 12\"", "price": 1000},
+                  {"label": "Lrg 14\"", "price": 1300}
+                ]
+              },
+              {
+                "name": "Vegetarian Pizza",
+                "description": "Onions, bell peppers, mushrooms, sweet corn, carrots, mozzarella cheese and jalapeños.",
+                "options": [
+                  {"label": "Med 12\"", "price": 900},
+                  {"label": "Lrg 14\"", "price": 1100}
+                ]
+              },
+              {
+                "name": "Margherita Pizza",
+                "description": "Mozzarella, fresh basil and marinara sauce.",
+                "options": [
+                  {"label": "Med 12\"", "price": 900},
+                  {"label": "Lrg 14\"", "price": 1000}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sides & Desserts",
+        "hidden": false,
+        "categories": [
+          {
+            "name": "Accompaniments",
+            "items": [
+              {"name": "Garlic Chips", "options": [{"label": "", "price": 400}]},
+              {"name": "Poussin Chips", "options": [{"label": "", "price": 400}]},
+              {"name": "Bhajia", "options": [{"label": "", "price": 400}]},
+              {"name": "Masala Chips", "options": [{"label": "", "price": 350}]},
+              {"name": "Roast Potatoes", "options": [{"label": "", "price": 350}]},
+              {"name": "Sauté Potatoes", "options": [{"label": "", "price": 350}]},
+              {"name": "Mokimo", "options": [{"label": "", "price": 250}]},
+              {"name": "Mashed Potatoes", "options": [{"label": "", "price": 250}]},
+              {"name": "Butter Naan", "options": [{"label": "2 pcs", "price": 200}]},
+              {"name": "Brown Ugali", "options": [{"label": "", "price": 150}]},
+              {"name": "Brown Plain Chapati", "options": [{"label": "", "price": 150}]},
+              {"name": "White Ugali", "options": [{"label": "", "price": 100}]},
+              {"name": "Plain Chapati", "options": [{"label": "", "price": 100}]}
+            ]
+          },
+          {
+            "name": "Garden Vegetables",
+            "items": [
+              {"name": "Mixed Vegetables", "options": [{"label": "", "price": 300}]},
+              {"name": "Managu / Saget", "description": "Creamed or non-creamed traditional greens.", "options": [{"label": "", "price": 250}]},
+              {"name": "Sautéed Spinach", "options": [{"label": "", "price": 200}]},
+              {"name": "Steamed Cabbage", "options": [{"label": "", "price": 200}]}
+            ]
+          },
+          {
+            "name": "Desserts",
+            "items": [
+              {
+                "name": "Chocolate Fudge",
+                "options": [{"label": "", "price": 600}]
+              },
+              {
+                "name": "Red Velvet Cheesecake",
+                "options": [{"label": "", "price": 500}]
+              },
+              {
+                "name": "Banana Split",
+                "description": "Banana with scoops of ice cream, chocolate sauce, nuts and whipped cream.",
+                "options": [{"label": "", "price": 500}]
+              },
+              {
+                "name": "Fruit Salad",
+                "description": "A refreshing medley of seasonal fresh fruits.",
+                "options": [{"label": "", "price": 400}]
+              },
+              {
+                "name": "Ice Cream Scoops",
+                "options": [{"label": "", "price": 400}]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 
 const $ = id => document.getElementById(id);
@@ -912,13 +1617,32 @@ const fix = s => s.replace(/'/g, "’");
 const fmt = n => "Ksh. " + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-const groups = D.groups.filter(g => !g.hidden);
+let activeMode = "bar";
 const imgs = [];
 let obs;
 
+function matchesQuery(item, q) {
+  if (!q) return true;
+  const hay = (item.name + " " + (item.description || "") + " " + (item.tags || []).join(" ")).toLowerCase();
+  return hay.includes(q);
+}
+
+function countMatchesInMode(modeKey, q) {
+  if (!q) return 0;
+  let total = 0;
+  MENUS[modeKey].groups.filter(g => !g.hidden).forEach(g => {
+    g.categories.forEach(c => {
+      c.items.forEach(i => {
+        if (matchesQuery(i, q)) total++;
+      });
+    });
+  });
+  return total;
+}
+
 function renderItem(i) {
   const tags = (i.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("");
-  const ds = i.description ? `<div class="ds">${esc(i.description)}</div>` : "";
+  const ds = i.description ? `<div class="ds">${esc(fix(i.description))}</div>` : "";
   const pr = i.options.map(o =>
     `<span class="pr-row">${o.label ? `<span class="pr-label">${esc(o.label)}</span>` : ""}<b class="pr-val">${fmt(o.price)}</b></span>`
   ).join("");
@@ -931,7 +1655,7 @@ function renderItem(i) {
   </div>`;
 }
 
-function renderSignatureShowcase() {
+function renderSignatureShowcase(groups) {
   const sigCat = groups.flatMap(g => g.categories).find(c => c.name === "Signature Cocktails");
   if (!sigCat) return "";
   const cards = sigCat.items.map(i => {
@@ -951,16 +1675,20 @@ function renderSignatureShowcase() {
 }
 
 function render(q) {
+  const currentMenu = MENUS[activeMode];
+  const groups = currentMenu.groups.filter(g => !g.hidden);
   const vis = [];
   imgs.length = 0;
 
   const html = groups.map(g => {
     const cats = g.categories.map(c => {
-      const its = c.items.filter(i => !q || i.name.toLowerCase().includes(q));
+      const its = c.items.filter(i => matchesQuery(i, q));
       if (!its.length) return "";
-      const showcase = (!q && c.name === "Signature Cocktails") ? renderSignatureShowcase() : "";
-      const rows = (!q && c.name === "Signature Cocktails") ? "" : its.map(renderItem).join("");
-      return `<div class="cat-banner"><span>${esc(c.name)}</span><span class="currency-hint">KSH</span></div>${showcase}${rows}`;
+      const isSigShowcase = (!q && activeMode === "bar" && c.name === "Signature Cocktails");
+      const showcase = isSigShowcase ? renderSignatureShowcase(groups) : "";
+      const rows = isSigShowcase ? "" : its.map(renderItem).join("");
+      const note = c.note ? `<p class="cat-note">${esc(c.note)}</p>` : "";
+      return `<div class="cat-banner"><span>${esc(c.name)}</span><span class="currency-hint">KSH</span></div>${note}${showcase}${rows}`;
     }).join("");
 
     if (!cats) return "";
@@ -974,7 +1702,18 @@ function render(q) {
     </section>`;
   }).join("");
 
-  $("m").innerHTML = html || `<div class="none">No drinks found matching “${esc(q)}”.</div>`;
+  if (html) {
+    $("m").innerHTML = html;
+  } else {
+    const otherMode = activeMode === "bar" ? "food" : "bar";
+    const otherLabel = otherMode === "food" ? "Restaurant Menu" : "Bar & Lounge Menu";
+    const otherCount = countMatchesInMode(otherMode, q);
+    const switchPrompt = otherCount > 0
+      ? `<div><button type="button" class="cross-switch-btn" data-switch="${otherMode}">View ${otherCount} match${otherCount > 1 ? "es" : ""} in ${otherLabel}</button></div>`
+      : "";
+    $("m").innerHTML = `<div class="none">No items in ${esc(currentMenu.kicker)} match “${esc(q)}”.${switchPrompt}</div>`;
+  }
+
   $("chips").innerHTML = vis.map((g, idx) =>
     `<button class="${idx === 0 ? "on" : ""}" data-g="g-${slug(g.name)}">${esc(g.name)}</button>`
   ).join("");
@@ -990,10 +1729,35 @@ function render(q) {
         });
       }
     });
-  }, {rootMargin: "-135px 0px -65% 0px"});
+  }, {rootMargin: "-145px 0px -65% 0px"});
 
   document.querySelectorAll("section.grp").forEach(s => obs.observe(s));
 }
+
+function setMode(mode, preserveQuery = false) {
+  if (!MENUS[mode]) return;
+  activeMode = mode;
+  const cfg = MENUS[mode];
+
+  $("tabBar").classList.toggle("active", mode === "bar");
+  $("tabBar").setAttribute("aria-selected", mode === "bar" ? "true" : "false");
+  $("tabFood").classList.toggle("active", mode === "food");
+  $("tabFood").setAttribute("aria-selected", mode === "food" ? "true" : "false");
+
+  $("menuKicker").textContent = cfg.kicker;
+  $("q").placeholder = cfg.placeholder;
+  $("legalNote").textContent = cfg.legal;
+
+  if (!preserveQuery) {
+    $("q").value = "";
+  }
+  render($("q").value.trim().toLowerCase());
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.querySelectorAll(".mode-btn").forEach(btn => {
+  btn.addEventListener("click", () => setMode(btn.dataset.mode, false));
+});
 
 $("chips").addEventListener("click", e => {
   const b = e.target.closest("button");
@@ -1005,6 +1769,11 @@ $("chips").addEventListener("click", e => {
 $("q").addEventListener("input", e => render(e.target.value.trim().toLowerCase()));
 
 $("m").addEventListener("click", e => {
+  const switchBtn = e.target.closest("[data-switch]");
+  if (switchBtn) {
+    setMode(switchBtn.dataset.switch, true);
+    return;
+  }
   const trigger = e.target.closest("[data-k]");
   if (!trigger) return;
   const i = imgs[trigger.dataset.k];
@@ -1026,7 +1795,12 @@ $("themeBtn").addEventListener("click", () => {
   $("themeBtn").textContent = next === "dark" ? "Paper Mode" : "Lounge Mode";
 });
 
-render("");
+// Support direct deep-linking via ?menu=food or #food
+if (location.hash === "#food" || new URLSearchParams(location.search).get("menu") === "food") {
+  setMode("food");
+} else {
+  render("");
+}
 </script>
 </body>
 </html>
