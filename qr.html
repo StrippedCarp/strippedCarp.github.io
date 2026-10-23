@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Maraluxe Resort and Spa — Branded QR Code & Table Stand</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0D140C;
+      --surface: #141D12;
+      --surface-card: #1B2618;
+      --border: #2A3B25;
+      --gold: #D4B06A;
+      --gold-dark: #8E6A2B;
+      --text: #F3EEDF;
+      --muted: #9EAA94;
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Jost", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .kicker {
+      font-size: 13px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 42px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .target-url-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 8px 18px;
+      border-radius: 99px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 13.5px;
+      word-break: break-all;
+    }
+
+    .target-url-badge a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Grid of QR Themes */
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .qr-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .qr-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .qr-card__title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .qr-card__desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .qr-preview-wrapper {
+      width: 280px;
+      height: 280px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .qr-preview-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn--gold {
+      background: linear-gradient(135deg, #D4B06A, #B88F3E);
+      color: #101810;
+      border-color: #E5C687;
+    }
+
+    .btn--gold:hover {
+      background: linear-gradient(135deg, #E5C687, #C9A356);
+      box-shadow: 0 4px 16px rgba(212, 176, 106, 0.35);
+    }
+
+    .btn--outline {
+      background: var(--surface-card);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn--outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Printable Table Stand Preview */
+    .printable-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 30px;
+      text-align: center;
+    }
+
+    .printable-section h2 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .printable-section p {
+      color: var(--muted);
+      font-size: 14.5px;
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
+
+    /* Print Template Card (Actual Physical Print Size: 4x6 / A6) */
+    .print-card {
+      width: 340px;
+      margin: 0 auto 28px;
+      background: #F6F1E6;
+      color: #1E2A1B;
+      border-radius: 16px;
+      border: 3px double #8E6A2B;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .print-card::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid #D4B06A;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .print-card__kicker {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #8E6A2B;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .print-card__title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: #131B0E;
+      line-height: 1.1;
+    }
+
+    .print-card__subtitle {
+      font-size: 11px;
+      color: #6B7466;
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+
+    .print-card__qr {
+      width: 190px;
+      height: 190px;
+      margin: 18px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #DCD3BE;
+    }
+
+    .print-card__qr img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .print-card__callout {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 600;
+      color: #8E6A2B;
+    }
+
+    .print-card__hint {
+      font-size: 11px;
+      color: #6B7466;
+      margin-top: 4px;
+    }
+
+    /* Print Specific Media Rules */
+    @media print {
+      body {
+        background: #FFF;
+        padding: 0;
+      }
+
+      header, .qr-grid, .btn-group, .target-url-badge, .printable-section > h2, .printable-section > p, .no-print {
+        display: none !important;
+      }
+
+      .printable-section {
+        background: transparent;
+        border: none;
+        padding: 0;
+      }
+
+      .print-card {
+        box-shadow: none;
+        margin: 20mm auto;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <p class="kicker">Maraluxe Resort and Spa</p>
+      <h1>Branded Digital Menu QR Codes</h1>
+      <p class="subtitle">Custom-crafted vector QR codes linked to your live bar & lounge menu.</p>
+
+      <div class="target-url-badge">
+        <span>🔗 Target Destination:</span>
+        <a href="https://bitter-king-a904.mbanijames123.workers.dev" target="_blank">
+          <strong>https://bitter-king-a904.mbanijames123.workers.dev</strong>
+        </a>
+      </div>
+    </header>
+
+    <!-- QR Themes Grid -->
+    <div class="qr-grid">
+      <!-- 1. Classic Light Theme -->
+      <div class="qr-card">
+        <h3 class="qr-card__title">Classic Linen & Gold</h3>
+        <p class="qr-card__desc">Best for bright spaces, poolside tables, outdoor cabanas, and light cardstock.</p>
+
+        <div class="qr-preview-wrapper" style="background: #F6F1E6;">
+          <img src="./maraluxe-qr-light.svg" alt="Maraluxe Classic Light QR Code">
+        </div>
+
+        <div class="btn-group">
+          <a href="./maraluxe-qr-light.svg" download="maraluxe-qr-light.svg" class="btn btn--gold">
+            <span>📥 Download Vector SVG</span>
+          </a>
+          <button type="button" class="btn btn--outline" onclick="downloadAsPng('./maraluxe-qr-light.svg', 'maraluxe-qr-light.png')">
+            <span>🖼️ Download PNG</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Nocturne Dark Theme -->
+      <div class="qr-card">
+        <h3 class="qr-card__title">Nocturne Forest & Gold</h3>
+        <p class="qr-card__desc">Best for atmospheric indoor cocktail lounges, intimate evening bars, and digital screens.</p>
+
+        <div class="qr-preview-wrapper" style="background: #101810;">
+          <img src="./maraluxe-qr-dark.svg" alt="Maraluxe Nocturne Dark QR Code">
+        </div>
+
+        <div class="btn-group">
+          <a href="./maraluxe-qr-dark.svg" download="maraluxe-qr-dark.svg" class="btn btn--gold">
+            <span>📥 Download Vector SVG</span>
+          </a>
+          <button type="button" class="btn btn--outline" onclick="downloadAsPng('./maraluxe-qr-dark.svg', 'maraluxe-qr-dark.png')">
+            <span>🖼️ Download PNG</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Printable Table Stand Section -->
+    <section class="printable-section">
+      <h2>Printable Table Tent / Acrylic Bar Stand</h2>
+      <p>Formatted for 4" × 6" acrylic table talkers, folded table tents, or wooden counter displays. Click below to print directly.</p>
+
+      <!-- Physical Card Mockup -->
+      <div class="print-card" id="printableCard">
+        <p class="print-card__kicker">Maraluxe Resort & Spa</p>
+        <h3 class="print-card__title">Bar & Lounge Menu</h3>
+        <p class="print-card__subtitle">Crafted Cocktails · Fine Spirits · Ice-Cold Beer</p>
+
+        <div class="print-card__qr">
+          <img src="./maraluxe-qr-light.svg" alt="Scan for Maraluxe Bar Menu">
+        </div>
+
+        <p class="print-card__callout">Scan with your phone camera</p>
+        <p class="print-card__hint">No app download required · Instant digital menu</p>
+      </div>
+
+      <div class="no-print">
+        <button type="button" class="btn btn--gold" onclick="window.print()" style="font-size: 15px; padding: 12px 28px;">
+          <span>🖨️ Print Table Stand Card</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Client-side SVG-to-PNG Converter Script -->
+  <script>
+    function downloadAsPng(svgUrl, filename) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 1200;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, 1200, 1200);
+
+        canvas.toBlob(function (blob) {
+          const a = document.createElement('a');
+          a.download = filename;
+          a.href = URL.createObjectURL(blob);
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 'image/png');
+      };
+      img.src = svgUrl;
+    }
+  </script>
+</body>
+</html>
