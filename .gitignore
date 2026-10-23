@@ -1,0 +1,16 @@
+# Dependencies & caches
+node_modules/
+.npm/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE config
+.vscode/
+.idea/
+
+# Scratch & test scripts
+scratch_*.js
+*.log

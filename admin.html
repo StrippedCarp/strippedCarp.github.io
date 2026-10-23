@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0D140C">
+  <meta name="description" content="Maraluxe Resort and Spa Content Management & Price Editor dashboard.">
+
+  <title>Maraluxe Resort and Spa — Menu & Price Editor</title>
+
+  <!-- Google Fonts: Cormorant Garamond & Jost -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       PIN Login Gate Modal
+       ========================================================================== -->
+  <div class="modal-overlay" id="pinGateModal" role="dialog" aria-modal="true" aria-labelledby="pinTitle">
+    <div class="modal-card" id="pinCard">
+      <div class="modal-header">
+        <div class="modal-logo">
+          <img class="brand-logo" alt="Maraluxe Resort and Spa">
+        </div>
+        <h2 class="modal-title" id="pinTitle">Manager Access</h2>
+        <p class="modal-subtitle">Enter your manager PIN to access the Maraluxe price and menu editor.</p>
+      </div>
+
+      <form id="pinForm" autocomplete="off">
+        <div class="form-group">
+          <label for="pinInput" class="form-label">Security PIN <span class="req">*</span></label>
+          <div class="pin-input-wrapper">
+            <input
+              type="password"
+              id="pinInput"
+              class="form-input pin-input"
+              placeholder="••••••••••••"
+              required
+              autofocus
+            >
+            <button type="button" class="pin-toggle-btn" id="pinToggleBtn" title="Show or hide PIN">
+              👁️
+            </button>
+          </div>
+          <div class="pin-error-msg" id="pinErrorMsg"></div>
+        </div>
+
+        <div class="modal-actions" style="justify-content: stretch;">
+          <button type="submit" class="btn btn--gold" style="width: 100%;">
+            <span>Unlock Menu Editor</span> ➔
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Top Navigation Bar
+       ========================================================================== -->
+  <nav class="admin-nav" aria-label="Admin Navigation">
+    <div class="admin-nav__inner">
+      <div class="admin-nav__brand">
+        <div class="admin-nav__logo-wrapper">
+          <img class="brand-logo admin-nav__logo-img" alt="Maraluxe">
+        </div>
+        <div class="admin-nav__brand-text">
+          <h1>Maraluxe Resort and Spa</h1>
+          <p>Bar Menu & Price Management</p>
+        </div>
+      </div>
+
+      <div class="admin-nav__actions">
+        <a href="./index.html" target="_blank" class="btn btn--surface btn--sm" title="Open the live guest bar menu in a new tab">
+          <span>View Live Bar Menu ↗</span>
+        </a>
+        <button type="button" class="btn btn--ghost btn--sm" id="logoutBtn" title="Lock the dashboard">
+          <span>🔒 Lock Screen</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       Main Dashboard Container
+       ========================================================================== */ -->
+  <main class="admin-container">
+
+    <!-- Header Section -->
+    <header class="admin-header">
+      <div class="admin-header__top">
+        <div>
+          <h2 class="admin-header__title">Content Management & Price Editor</h2>
+          <p class="admin-header__subtitle">
+            Update prices, edit names, toggle out-of-stock items, or add new drinks. When done, download the updated data file.
+          </p>
+        </div>
+        <div>
+          <button type="button" class="btn btn--gold" id="openAddModalBtn">
+            <span>+ Add New Drink</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="admin-metrics">
+        <div class="metric-card">
+          <div class="metric-card__icon">🍸</div>
+          <div>
+            <div class="metric-card__val" id="metricTotalItems">0</div>
+            <div class="metric-card__lbl">Total Drinks</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card__icon">📂</div>
+          <div>
+            <div class="metric-card__val" id="metricTotalCategories">0</div>
+            <div class="metric-card__lbl">Active Categories</div>
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--modified">
+          <div class="metric-card__icon">✏️</div>
+          <div>
+            <div class="metric-card__val" id="metricModifiedCount">0</div>
+            <div class="metric-card__lbl">Changes in Session</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card__icon">🚫</div>
+          <div>
+            <div class="metric-card__val" id="metricOutOfStockCount">0</div>
+            <div class="metric-card__lbl">Out of Stock</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Toolbar: Search, Filters & Category Pills -->
+    <section class="admin-toolbar" aria-label="Inventory Filters">
+      <div class="admin-toolbar__row">
+        <!-- Search -->
+        <div class="search-box">
+          <span class="search-box__icon">🔍</span>
+          <input
+            type="search"
+            id="adminSearchInput"
+            class="search-box__input"
+            placeholder="Search by drink name or brand…"
+            autocomplete="off"
+          >
+          <button type="button" class="search-box__clear" id="searchClearBtn" hidden title="Clear search">✕</button>
+        </div>
+
+        <!-- Filter Dropdowns -->
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <select id="groupFilterSelect" class="filter-select" aria-label="Filter by group">
+            <option value="ALL">All Menu Groups</option>
+          </select>
+
+          <select id="statusFilterSelect" class="filter-select" aria-label="Filter by status">
+            <option value="ALL">All Items</option>
+            <option value="MODIFIED">Modified Only (✏️)</option>
+            <option value="OUT_OF_STOCK">Out of Stock Only (🚫)</option>
+            <option value="IN_STOCK">In Stock Only (✅)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Category Pills -->
+      <div class="category-filter-pills" id="categoryFilterPills" role="tablist" aria-label="Categories">
+        <!-- Dynamic Category Pills inserted here -->
+      </div>
+    </section>
+
+    <!-- Dynamic Menu Content Container -->
+    <section id="inventoryContainer" aria-label="Menu Items List">
+      <!-- Dynamic category groups and item rows inserted here -->
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       Sticky Bottom Action Bar
+       ========================================================================== -->
+  <footer class="admin-sticky-bar" aria-label="Quick Actions">
+    <div class="admin-sticky-bar__inner">
+      <div class="admin-sticky-bar__status">
+        <span class="status-dot" id="statusDot"></span>
+        <div>
+          <div class="admin-sticky-bar__text" id="statusMessage">All menu items are current</div>
+          <div class="admin-sticky-bar__subtext" id="statusSubtext">No unsaved adjustments</div>
+        </div>
+      </div>
+
+      <div class="admin-sticky-bar__buttons">
+        <button type="button" class="btn btn--surface btn--sm" id="discardChangesBtn" disabled title="Reset working changes back to the original file">
+          <span>Discard Changes</span>
+        </button>
+
+        <button type="button" class="btn btn--surface btn--sm" id="previewCodeBtn" title="Inspect the generated code preview">
+          <span>Preview Code</span>
+        </button>
+
+        <button type="button" class="btn btn--gold" id="downloadDataBtn">
+          <span>📥 Download Updated menu-data.js</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       Modal: Add New Drink
+       ========================================================================== -->
+  <div class="modal-overlay" id="addDrinkModal" role="dialog" aria-modal="true" aria-labelledby="addDrinkTitle" hidden>
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header" style="text-align: left; margin-bottom: 20px;">
+        <h3 class="modal-title" id="addDrinkTitle" style="font-size: 24px;">Add New Drink</h3>
+        <p class="modal-subtitle">Add a new beverage to the Maraluxe Resort & Spa inventory.</p>
+      </div>
+
+      <form id="addDrinkForm" autocomplete="off">
+        <div class="form-group">
+          <label for="newItemName" class="form-label">Drink Name <span class="req">*</span></label>
+          <input
+            type="text"
+            id="newItemName"
+            class="form-input"
+            placeholder="e.g. Don Julio 1942 Añejo"
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newItemCategory" class="form-label">Category <span class="req">*</span></label>
+            <select id="newItemCategory" class="form-select" required>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="newItemTag" class="form-label">Highlight Tag (Optional)</label>
+            <input
+              type="text"
+              id="newItemTag"
+              class="form-input"
+              placeholder="e.g. Premium, Signature, New"
+            >
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newItemOptionLabel" class="form-label">Size / Volume Label</label>
+            <input
+              type="text"
+              id="newItemOptionLabel"
+              class="form-input"
+              placeholder="e.g. 750ml, Bottle, Glass, Tot"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="newItemPrice" class="form-label">Price (Ksh.) <span class="req">*</span></label>
+            <input
+              type="number"
+              id="newItemPrice"
+              class="form-input"
+              placeholder="e.g. 15000"
+              min="1"
+              step="10"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="newItemDesc" class="form-label">Description (Optional)</label>
+          <textarea
+            id="newItemDesc"
+            class="form-textarea"
+            rows="2"
+            placeholder="Tasting notes, vintage, or serving recommendation…"
+          ></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn--surface" id="cancelAddBtn">Cancel</button>
+          <button type="submit" class="btn btn--gold">Add to Menu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Modal: Confirm Delete
+       ========================================================================== -->
+  <div class="modal-overlay" id="confirmDeleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteTitle" hidden>
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header" style="text-align: left; margin-bottom: 16px;">
+        <h3 class="modal-title" id="deleteTitle" style="font-size: 22px; color: var(--admin-danger);">Delete Menu Item?</h3>
+        <p class="modal-subtitle" id="deleteConfirmPrompt">
+          Are you sure you want to remove this drink from the menu?
+        </p>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn--surface" id="cancelDeleteBtn">Keep Item</button>
+        <button type="button" class="btn btn--gold" id="confirmDeleteBtn" style="background: var(--admin-danger); border-color: var(--admin-danger); color: white;">
+          Confirm Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Modal: Code & JSON Preview
+       ========================================================================== -->
+  <div class="modal-overlay" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle" hidden>
+    <div class="modal-card" style="max-width: 800px; max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="text-align: left; margin-bottom: 14px;">
+        <h3 class="modal-title" id="previewTitle" style="font-size: 22px;">Generated menu-data.js Preview</h3>
+        <p class="modal-subtitle">Review the packaged JavaScript file before downloading.</p>
+      </div>
+
+      <div style="flex: 1; overflow-y: auto; background: var(--admin-bg); border: 1px solid var(--admin-border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 16px;">
+        <pre style="font-family: monospace; font-size: 12.5px; color: var(--admin-text-main); white-space: pre-wrap; word-break: break-all;" id="previewCodeContent"></pre>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn--surface" id="closePreviewBtn">Close</button>
+        <button type="button" class="btn btn--gold" id="downloadFromPreviewBtn">Download File</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Toast Notifications Container
+       ========================================================================== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Application Scripts -->
+  <script src="./assets.js"></script>
+  <script src="./menu-data.js"></script>
+  <script src="./admin.js"></script>
+</body>
+</html>
