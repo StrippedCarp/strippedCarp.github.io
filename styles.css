@@ -70,6 +70,9 @@ body {
   color: var(--color-ink);
   font: 400 16px/1.45 var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  text-rendering: optimizeSpeed;
 }
 
 body::before {
@@ -133,6 +136,8 @@ body::before {
   background-color: var(--color-surface-dark);
   padding: 8px 12px 10px;
   border-bottom: 1px solid #2A3524;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .menu-nav__search {
@@ -156,6 +161,8 @@ body::before {
   overflow-x: auto;
   margin-top: 8px;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 
 .category-pills::-webkit-scrollbar {
@@ -192,6 +199,8 @@ body::before {
 
 .menu-section {
   scroll-margin-top: 130px;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
 }
 
 .category-banner {
@@ -205,6 +214,8 @@ body::before {
   background:
     linear-gradient(180deg, rgba(19, 27, 14, 0.28), rgba(19, 27, 14, 0.90)),
     var(--banner-image) center / cover var(--color-surface-dark);
+  transform: translateZ(0);
+  contain: layout paint;
 }
 
 .category-banner--cocktails { --banner-image: var(--banner-cocktails); }
@@ -250,9 +261,12 @@ body::before {
   gap: 12px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   margin: 10px -18px 0;
   padding: 4px 18px 8px;
   scrollbar-width: none;
+  contain: layout paint;
 }
 
 .featured-carousel::-webkit-scrollbar {
@@ -308,6 +322,7 @@ body::before {
   gap: 16px;
   padding: 11px 0;
   border-bottom: 1px solid var(--color-border);
+  contain: layout paint;
 }
 
 .menu-item__info {

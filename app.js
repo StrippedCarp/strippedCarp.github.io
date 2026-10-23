@@ -88,6 +88,10 @@
       const thumbImg = document.createElement('img');
       const hasFullImage = Boolean(itemData.image.f && isSafeImageUri(itemData.image.f));
       thumbImg.className = 'menu-item__thumb' + (hasFullImage ? ' menu-item__thumb--zoomable' : '');
+      thumbImg.loading = 'lazy';
+      thumbImg.decoding = 'async';
+      thumbImg.width = 64;
+      thumbImg.height = 64;
       thumbImg.src = itemData.image.t;
       thumbImg.alt = formatTypography(itemData.name);
 
@@ -192,6 +196,10 @@
         const img = document.createElement('img');
         const hasFullImage = Boolean(itemData.image.f && isSafeImageUri(itemData.image.f));
         img.className = 'featured-card__img' + (hasFullImage ? ' menu-item__thumb--zoomable' : '');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.width = 92;
+        img.height = 92;
         img.src = itemData.image.t;
         img.alt = formatTypography(itemData.name);
 
@@ -353,21 +361,39 @@
   /* ==========================================================================
      6. Scroll-Spy & Smooth Navigation
      ========================================================================== */
+  let activeSpySectionId = '';
+  let scrollPillsRafId = null;
+
   function setupScrollSpy() {
     if (scrollSpyObserver) {
       scrollSpyObserver.disconnect();
     }
 
     scrollSpyObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) {
-          return;
+      let targetEntry = null;
+      for (let i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          targetEntry = entries[i];
+          break;
         }
+      }
+
+      if (!targetEntry || targetEntry.target.id === activeSpySectionId) {
+        return;
+      }
+
+      activeSpySectionId = targetEntry.target.id;
+
+      if (scrollPillsRafId) {
+        cancelAnimationFrame(scrollPillsRafId);
+      }
+
+      scrollPillsRafId = requestAnimationFrame(function () {
         const pillButtons = categoryPillsEl.querySelectorAll('.category-pills__btn');
         pillButtons.forEach(function (btn) {
-          const isMatch = btn.dataset.targetSection === entry.target.id;
+          const isMatch = btn.dataset.targetSection === activeSpySectionId;
           btn.classList.toggle('category-pills__btn--active', isMatch);
-          if (isMatch) {
+          if (isMatch && typeof btn.scrollIntoView === 'function') {
             btn.scrollIntoView({ inline: 'center', block: 'nearest' });
           }
         });
@@ -468,11 +494,20 @@
           wine: '--banner-wine'
         };
 
-        Object.keys(bannerKeys).forEach(function (key) {
-          const uri = assets.banners[key];
-          if (isSafeImageUri(uri)) {
-            rootStyle.setProperty(bannerKeys[key], 'url("' + uri + '")');
-          }
+        // Hydrate immediate above-the-fold hero banner
+        if (isSafeImageUri(assets.banners.hero)) {
+          rootStyle.setProperty('--banner-hero', 'url("' + assets.banners.hero + '")');
+        }
+
+        // Defer below-the-fold banners to leave initial thread completely free
+        const deferFn = window.requestIdleCallback || window.requestAnimationFrame || function (cb) { setTimeout(cb, 16); };
+        deferFn(function () {
+          ['cocktails', 'spirits', 'green', 'lounge', 'wine'].forEach(function (key) {
+            const uri = assets.banners[key];
+            if (isSafeImageUri(uri)) {
+              rootStyle.setProperty(bannerKeys[key], 'url("' + uri + '")');
+            }
+          });
         });
       }
     }
