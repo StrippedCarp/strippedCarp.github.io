@@ -219,10 +219,12 @@ check('app.js calls removeAttribute("src") on lightbox close', appJs.includes('r
 // Input hardening: 60-char cap
 check('app.js enforces 60-character search cap', appJs.includes('.slice(0, 60)') || appJs.includes('substring(0, 60)'));
 
-// IntersectionObserver scroll-spy
-check('app.js uses IntersectionObserver', appJs.includes('IntersectionObserver'));
+// Scroll-spy + pill navigation
+check('app.js has scroll-spy listener', appJs.includes("addEventListener('scroll', onScrollForSpy"));
 check('app.js highlights category-pills__btn--active', appJs.includes('category-pills__btn--active'));
-check('app.js scrolls pill into view', appJs.includes('scrollIntoView'));
+check('app.js pill click scrolls to exact section', appJs.includes('scrollToSection(button.dataset.targetSection)'));
+check('manifest.webmanifest exists and is linked', fileExists('manifest.webmanifest') && readFile('index.html').includes('rel="manifest"'));
+check('PWA icons exist', fileExists('icons/icon-192.png') && fileExists('icons/icon-512.png'));
 
 // Age gate: sessionStorage with maraluxe_age_verified
 check('app.js uses sessionStorage key "maraluxe_age_verified"', appJs.includes('maraluxe_age_verified'));

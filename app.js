@@ -56,7 +56,6 @@
   const ageGatePromptEl = document.getElementById('ageGatePrompt');
   const ageGateActionsEl = document.getElementById('ageGateActions');
 
-  let scrollSpyObserver = null;
 
   /* ==========================================================================
      3. Banner Style Mapping
@@ -381,50 +380,88 @@
      6. Scroll-Spy & Smooth Navigation
      ========================================================================== */
   let activeSpySectionId = '';
-  let scrollPillsRafId = null;
+  let spyRafId = null;
+  let navigationLockTimer = null;
+  let isProgrammaticScroll = false;
+  const navEl = document.querySelector('.menu-nav');
 
-  function setupScrollSpy() {
-    if (scrollSpyObserver) {
-      scrollSpyObserver.disconnect();
+  // Height of the sticky nav (plus a little breathing room) = the "reading line".
+  function getNavOffset() {
+    return (navEl ? navEl.getBoundingClientRect().bottom : 0) + 8;
+  }
+
+  function setActivePill(sectionId) {
+    if (!sectionId || sectionId === activeSpySectionId) {
+      return;
     }
-    activeSpySectionId = ''; // reset so re-rendered pills sync after search/clear
-
-    scrollSpyObserver = new IntersectionObserver(function (entries) {
-      let targetEntry = null;
-      for (let i = 0; i < entries.length; i++) {
-        if (entries[i].isIntersecting) {
-          targetEntry = entries[i];
-          break;
-        }
+    activeSpySectionId = sectionId;
+    categoryPillsEl.querySelectorAll('.category-pills__btn').forEach(function (btn) {
+      const isMatch = btn.dataset.targetSection === sectionId;
+      btn.classList.toggle('category-pills__btn--active', isMatch);
+      if (isMatch) {
+        // Keep the active pill visible inside the horizontal strip only (never scroll the page).
+        const stripRect = categoryPillsEl.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        categoryPillsEl.scrollLeft += (btnRect.left + btnRect.width / 2) - (stripRect.left + stripRect.width / 2);
       }
-
-      if (!targetEntry || targetEntry.target.id === activeSpySectionId) {
-        return;
-      }
-
-      activeSpySectionId = targetEntry.target.id;
-
-      if (scrollPillsRafId) {
-        cancelAnimationFrame(scrollPillsRafId);
-      }
-
-      scrollPillsRafId = requestAnimationFrame(function () {
-        const pillButtons = categoryPillsEl.querySelectorAll('.category-pills__btn');
-        pillButtons.forEach(function (btn) {
-          const isMatch = btn.dataset.targetSection === activeSpySectionId;
-          btn.classList.toggle('category-pills__btn--active', isMatch);
-          if (isMatch && typeof btn.scrollIntoView === 'function') {
-            btn.scrollIntoView({ inline: 'center', block: 'nearest' });
-          }
-        });
-      });
-    }, { rootMargin: '-130px 0px -65% 0px' });
-
-    document.querySelectorAll('.menu-section').forEach(function (section) {
-      scrollSpyObserver.observe(section);
     });
   }
 
+  // Active section = the last one whose top has passed the reading line.
+  function updateActiveFromScroll() {
+    spyRafId = null;
+    if (isProgrammaticScroll) {
+      return;
+    }
+    const line = getNavOffset();
+    const sections = document.querySelectorAll('.menu-section');
+    let currentId = sections.length ? sections[0].id : '';
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i].getBoundingClientRect().top <= line + 1) {
+        currentId = sections[i].id;
+      } else {
+        break;
+      }
+    }
+    setActivePill(currentId);
+  }
+
+  function onScrollForSpy() {
+    if (isProgrammaticScroll) {
+      // Release the lock once the smooth scroll has settled.
+      clearTimeout(navigationLockTimer);
+      navigationLockTimer = setTimeout(function () {
+        isProgrammaticScroll = false;
+        updateActiveFromScroll();
+      }, 150);
+      return;
+    }
+    if (!spyRafId) {
+      spyRafId = requestAnimationFrame(updateActiveFromScroll);
+    }
+  }
+
+  function scrollToSection(sectionId) {
+    const target = document.getElementById(sectionId);
+    if (!target) {
+      return;
+    }
+    // Highlight exactly the pill that was pressed, and ignore scroll-spy until we arrive.
+    setActivePill(sectionId);
+    isProgrammaticScroll = true;
+    clearTimeout(navigationLockTimer);
+    navigationLockTimer = setTimeout(function () {
+      isProgrammaticScroll = false;
+    }, 1200); // safety net if no scroll event fires (already at target)
+
+    const top = target.getBoundingClientRect().top + window.pageYOffset - getNavOffset() + 9;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  function setupScrollSpy() {
+    activeSpySectionId = ''; // pills were rebuilt; resync highlight
+    updateActiveFromScroll();
+  }
   /* ==========================================================================
      7. Lightbox Controller
      ========================================================================== */
@@ -542,11 +579,11 @@
       if (!button) {
         return;
       }
-      const targetSection = document.getElementById(button.dataset.targetSection);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSection(button.dataset.targetSection);
     });
+
+    window.addEventListener('scroll', onScrollForSpy, { passive: true });
+    window.addEventListener('resize', onScrollForSpy, { passive: true });
 
     // Attach hardened search input event listener
     searchInputEl.addEventListener('input', function (event) {

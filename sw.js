@@ -11,7 +11,11 @@ const APP_SHELL_FILES = [
   './styles.css',
   './assets.js',
   './menu-data.js',
-  './app.js'
+  './app.js',
+  './manifest.webmanifest',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/apple-touch-icon.png'
 ];
 
 // Pre-cache core application shell during install
