@@ -288,7 +288,7 @@ check('HTML loads Google Fonts stylesheet', html.includes('fonts.googleapis.com/
 console.log('\n── 2F. sw.js (Offline-First Service Worker) ──');
 const sw = readFile('sw.js');
 
-check('sw.js defines CACHE_NAME = "maraluxe-bar-menu-v1"', sw.includes("'maraluxe-bar-menu-v1'") || sw.includes('"maraluxe-bar-menu-v1"'));
+check('sw.js defines CACHE_NAME = "maraluxe-bar-menu-v2"', sw.includes("'maraluxe-bar-menu-v2'") || sw.includes('"maraluxe-bar-menu-v2"'));
 
 // Pre-cache list
 const precacheFiles = ['./', './index.html', './styles.css', './assets.js', './menu-data.js', './app.js'];

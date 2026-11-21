@@ -15,7 +15,7 @@ Once deployed on GitHub Pages:
 
 - **Manager Price Editor Dashboard:** `https://<your-username>.github.io/<repo-name>/admin.html`
   - Non-developer friendly management tool for restaurant and bar managers.
-  - **Manager Passcode:** `Maraluxe2026!`
+  - **Manager Passcode:** set in `admin.js` (`ADMIN_PIN`) - change it before launch and never publish it here.
   - Allows inline price adjustments, stock status toggling (`In Stock` / `Out of Stock`), and adding new items.
   - **One-Click Download:** Packages changes into an updated, immutable `menu-data.js` file ready to be committed.
 

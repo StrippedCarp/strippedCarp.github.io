@@ -111,13 +111,29 @@
     titleSpan.textContent = formatTypography(itemData.name);
     textContainer.appendChild(titleSpan);
 
+    const isUnavailable = Boolean(itemData.outOfStock) ||
+      (Array.isArray(itemData.tags) && itemData.tags.includes('Out of Stock'));
+    if (isUnavailable) {
+      itemRow.classList.add('menu-item--unavailable');
+    }
+
     if (Array.isArray(itemData.tags)) {
       itemData.tags.forEach(function (tagText) {
+        if (tagText === 'Out of Stock') {
+          return; // rendered below as a single unavailable badge
+        }
         const badgeSpan = document.createElement('span');
         badgeSpan.className = 'menu-item__badge';
         badgeSpan.textContent = tagText;
         textContainer.appendChild(badgeSpan);
       });
+    }
+
+    if (isUnavailable) {
+      const soldOutBadge = document.createElement('span');
+      soldOutBadge.className = 'menu-item__badge menu-item__badge--unavailable';
+      soldOutBadge.textContent = 'Unavailable';
+      textContainer.appendChild(soldOutBadge);
     }
 
     if (itemData.description) {
@@ -308,7 +324,10 @@
         }
 
         const matchingItems = category.items.filter(function (item) {
-          return !cleanQuery || item.name.toLowerCase().includes(cleanQuery);
+          return !cleanQuery ||
+            item.name.toLowerCase().includes(cleanQuery) ||
+            category.name.toLowerCase().includes(cleanQuery) ||
+            (item.description && item.description.toLowerCase().includes(cleanQuery));
         });
 
         if (matchingItems.length === 0) {
@@ -368,6 +387,7 @@
     if (scrollSpyObserver) {
       scrollSpyObserver.disconnect();
     }
+    activeSpySectionId = ''; // reset so re-rendered pills sync after search/clear
 
     scrollSpyObserver = new IntersectionObserver(function (entries) {
       let targetEntry = null;
@@ -440,7 +460,11 @@
       return;
     }
 
+    document.body.style.overflow = 'hidden';
+    confirmAgeBtnEl.focus();
+
     confirmAgeBtnEl.addEventListener('click', function () {
+      document.body.style.overflow = '';
       try {
         window.sessionStorage.setItem('maraluxe_age_verified', '1');
       } catch (storageError) {

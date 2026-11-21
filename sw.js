@@ -3,7 +3,7 @@
    Strategy: Cache-First, Network-Fallback with Dynamic Font Caching
    ========================================================================== */
 
-const CACHE_NAME = 'maraluxe-bar-menu-v1';
+const CACHE_NAME = 'maraluxe-bar-menu-v2';
 
 const APP_SHELL_FILES = [
   './',
@@ -58,35 +58,44 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  event.respondWith(
-    caches.match(request).then(function (cachedResponse) {
-      if (cachedResponse) {
-        return cachedResponse;
+  const isSameOrigin = url.origin === self.location.origin;
+  const isGoogleFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
+
+  if (!isSameOrigin && !isGoogleFont) {
+    return;
+  }
+
+  // Same-origin (menu, prices, scripts): network-first so price updates show immediately,
+  // falling back to cache when offline. Fonts: cache-first.
+  const networkFirst = isSameOrigin;
+
+  function fetchAndCache() {
+    return fetch(request).then(function (networkResponse) {
+      if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then(function (cache) {
+          cache.put(request, responseToCache);
+        });
       }
+      return networkResponse;
+    });
+  }
 
-      return fetch(request).then(function (networkResponse) {
-        if (!networkResponse || (networkResponse.status !== 200 && networkResponse.status !== 0)) {
-          return networkResponse;
-        }
-
-        const isSameOrigin = url.origin === self.location.origin;
-        const isGoogleFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
-
-        if (isSameOrigin || isGoogleFont) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(request, responseToCache);
+  event.respondWith(
+    networkFirst
+      ? fetchAndCache().catch(function (fetchError) {
+          return caches.match(request).then(function (cachedResponse) {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            if (request.mode === 'navigate') {
+              return caches.match('./index.html');
+            }
+            throw fetchError;
           });
-        }
-
-        return networkResponse;
-      }).catch(function (fetchError) {
-        // Fallback for HTML page navigation when offline
-        if (request.mode === 'navigate') {
-          return caches.match('./index.html');
-        }
-        throw fetchError;
-      });
-    })
+        })
+      : caches.match(request).then(function (cachedResponse) {
+          return cachedResponse || fetchAndCache();
+        })
   );
 });
